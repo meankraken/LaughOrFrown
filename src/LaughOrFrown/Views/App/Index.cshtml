@@ -1,0 +1,134 @@
+﻿@{
+
+}
+
+<html>
+
+<head>
+    <title>Laugh Or Frown</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bevan" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Old+Standard+TT" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=News Cycle" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ovo" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Fanwood Text" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Linden Hill" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/styles/index.css" />
+    <link rel="stylesheet" type="text/css" href="~/styles/smiles.css" />
+
+</head>
+
+
+<body>
+    <div class="container">
+        <div id="headerBar">
+            <p>Laugh or Frown</p>
+            <h6 class="smallText">Bringing you laughs you may regret later</h6>
+            <div class="sideBox1">
+                <h3>Weather</h3>
+                <h4>Go look out a window</h4>
+            </div>
+            <div class="sideBox2">
+                <h3>"I laughed.. and I'm not sure if that makes me a bad person"</h3>
+            </div>
+        </div>
+        <div class="flatBar"></div>
+        <div class="table">
+            <div class="row">
+                <div class="col-md-3 linkBox">
+                    <div class="titleBar">
+                        <p>Top laughs</p>
+                    </div>
+                    <img src="~/imgs/obama.jpg" />
+                </div>
+                <div class="col-md-3 linkBox">
+                    <div class="titleBar">
+                        <p>Offensive laughs</p>
+                    </div>
+                    <img src="~/imgs/donald.jpg" />
+                </div>
+                <div class="col-md-3 linkBox">
+                    <div class="titleBar">
+                        <p>New additions</p>
+                    </div>
+                    <img src="~/imgs/hillary-laughing.jpg" />
+                </div>
+                <div class="col-md-3 linkBox">
+                    <div class="titleBar">
+                        <p>Random giggles</p>
+                    </div>
+                    <img src="~/imgs/llama.jpg" />
+                </div>
+            </div>
+            <div id="dateBox">
+                <p id="dateText">Published in Houston, Texas - </p>
+            </div>
+            <div id="bodyRow" class="row">
+                <div class="col-md-4 bodyCol">
+                    <h3>"Never take life seriously. Nobody gets out alive anyway."</h3>
+                    <p class="authorText">- Sydney J. Harris</p>
+                    <p>When life hands you lemons, squirt the juice into your eyes and laugh about it. At least, this has been our philosophy here at LaughOrFrown since its conception in the year 2016.</p>
+                    <p>And yeah, you may be thinking "that's a weird way of dealing with things, you guys are strange". While that may be so, LaughOrFrown's ultimate goal is to build a community of individuals who revel in a good joke, whether at their own expense.. or at the expense of others. </p>
+                </div>
+                <div class="col-md-4 bodyCol">
+                    <h3>"Wait... why does this newspaper have a login form?"</h3>
+                    <p class="authorText">- Nosy Person</p>
+                    <p>Why not? LaughOrFrown is constantly looking for ways to provide the unexpected, and in this case the unexpected takes the form of a form.</p>
+
+                    <form asp-controller="App" asp-action="Login" id="loginForm" method="post">
+                        <div class="inputBox">
+                            <label>Username</label>
+                            <input type="text" name="username" />
+                        </div>
+                        <div class="inputBox">
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </div><br />
+                        <button id="loginBtn" type="submit">Login</button>
+                    </form>
+                    <hr />
+                    <p>Not yet a member of our esteemed community? Register below for all the perks.</p>
+
+                    <form asp-controller="App" asp-action="Register" id="registerForm" method="post">
+                        <div class="inputBox">
+                            <label>Username</label>
+                            <input type="text" name="username" />
+                        </div>
+                        <div class="inputBox">
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </div><br />
+                        <button id="registerBtn" type="submit">Register</button>
+                    </form>
+
+                </div>
+                <div class="col-md-4 bodyCol">
+                    <h3>"So I can say whatever I want as long as it's funny? Awesome!"</h3>
+                    <p class="authorText">- Eager Jokester</p>
+                    <p>Now hold your hypothetical horses cowboy. LaughOrFrown is ready and willing to accept all jokes and funny anecdotes as you present them. However, whether they earn a permenant place in our pages is another story. It will be up to your fellow users to determine if your post is truly laugh-worthy, and if crude, crude within reason. </p>
+                    <p>With that said and done, we believe you're ready to start sharing jokes with the best of them. Just make sure you get more laughs than frowns!</p>
+                    <h2 id="big1">Laugh</h2>
+                    <h2 id="big2">Frown</h2>
+                    <div id="smiles">
+                        <div class="cap"></div>
+                        <div class="face"></div>
+                        <div class="leftBrow"></div>
+                        <div class="rightBrow"></div>
+                        <div class="leftEye"></div>
+                        <div class="rightEye"></div>
+                        <div class="smile"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/scripts/indexScript.js"></script>
+
+
+</body>
+
+</html>

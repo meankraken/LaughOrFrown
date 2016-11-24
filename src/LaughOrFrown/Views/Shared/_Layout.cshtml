@@ -1,0 +1,56 @@
+﻿@{ 
+
+}
+
+<!Doctype HTML>
+
+<html>
+
+<head>
+    <title>Browse Jokes</title>
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Abel" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allan" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bangers" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/styles/jokes.css" />
+
+</head>
+
+<body>
+    <div id="outerContainer" class="container">
+        <div id="innerContainer" class="container">
+            <div class="titleBar">
+                <h2 class="titleText">SAMPLE TITLE</h2>
+            </div>
+            <div class="designBar"></div>
+            <div class="linkBar">
+                <div class="linkBox">
+                    <h3>Top Jokes</h3>
+                </div>
+                <div class="linkBox">
+                    <h3>Offensive Jokes</h3>
+                </div>
+                <div class="linkBox">
+                    <h3>New Additions</h3>
+                </div>
+                <div class="linkBox">
+                    <h3>Random Reel</h3>
+                </div>
+            </div>
+            
+            @RenderBody() 
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

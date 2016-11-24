@@ -1,0 +1,163 @@
+﻿#smiles {
+  position:relative;
+  height:200px;
+  width:225px;
+  top:5%;
+  margin-left:auto;
+  margin-right:auto;
+  transform-origin:center center;
+  -webkit-animation:faceMove 10s steps(1,end) infinite;
+}
+
+.cap {
+  position:absolute;
+  height:65px;
+  width:210px;
+  left:0px;
+  background: #3b4344;
+  border-radius:50% 50% 0 0;
+  transform:rotate(-5deg);
+  
+}
+
+.face {
+  height:200px;
+  width:225px;
+  border-radius:50%;
+  background-color:grey;
+}
+
+.leftBrow {
+  position:absolute;
+  height:4px;
+  width:40px;
+  background-color:black;
+  top:70px;
+  left:65px;
+  -webkit-animation:leftBrowMove 10s infinite;
+}
+
+.rightBrow {
+  position:absolute;
+  height:4px;
+  width:40px;
+  background-color:black;
+  top:70px;
+  left:120px;
+  -webkit-animation:rightBrowMove 10s infinite;
+}
+
+.leftEye {
+  position:absolute;
+  top:80px;
+  left:55px;
+  height:65px;
+  width:55px;
+  border-radius:50% 50%;
+  background-color:white;
+  transform:rotate(25deg);
+  -webkit-animation:blink 5s steps(1,end) infinite;
+}
+.leftEye::after {
+  display:block;
+  position:relative;
+  content:'';
+  top:25px;
+  left:35px;
+  height:8px;
+  width:8px;
+  border-radius:50%;
+  background-color:black;
+  -webkit-animation:dotblink 5s steps(1,end) infinite, leftEyeMove 5s infinite;
+}
+
+.rightEye {
+  position:absolute;
+  top:80px;
+  left:115px;
+  height:65px;
+  width:55px;
+  border-radius:50% 50%;
+  background-color:white;
+  transform:rotate(-25deg);
+  -webkit-animation:blink 5s steps(1,end) infinite;
+}
+.rightEye::after {
+  display:block;
+  position:relative;
+  content:'';
+  top:25px;
+  left:15px;
+  height:8px;
+  width:8px;
+  border-radius:50%;
+  background-color:black;
+  -webkit-animation:dotblink 5s steps(1,end) infinite, rightEyeMove 5s infinite;
+}
+
+.smile {
+  position:absolute;
+  border-style:solid;
+  border-color: black transparent transparent transparent;
+  border-width:2px;
+  border-radius:0 15px 0 0;
+  height:20px;
+  width:30px;
+  top:170px;
+  left:100px;
+  transform-origin:top;
+  -webkit-animation:smile 10s infinite, shocked 10s infinite;
+  
+}
+
+@-webkit-keyframes blink {
+  70%   { height:0px; }
+  73%  { height:65px; }
+  
+}
+@-webkit-keyframes dotblink {
+  70%   { background-color:transparent; }
+  73%  { background-color:black; }
+  
+}
+
+@-webkit-keyframes leftBrowMove {
+  0%,30%,96% { transform:rotate(0deg); }
+  31%,70% { transform:rotate(-12deg); }
+  71%,95% { transform:rotate(15deg); }
+}
+@-webkit-keyframes rightBrowMove {
+  0%,30%,96% { transform:rotate(0deg); }
+  31%,70% { transform:rotate(12deg); }
+  71%,95% { transform:rotate(-15deg); }
+}
+
+@-webkit-keyframes leftEyeMove {
+  0% { }
+  20%,50% { left: 5px; top: 35px; }
+  55%,95% { left: 35px; top:25px; }
+}
+@-webkit-keyframes rightEyeMove {
+  0% { }
+  20%,50% { left: 5px; top: 20px; }
+  55%,95% { left: 15px; top:25px; }
+}
+
+@-webkit-keyframes smile {
+  0%,99%  { transform:rotateX(0deg); }
+  20% { transform:rotateX(75deg); }
+  21% { transform:rotateX(105deg); }
+  45%  { transform:rotateX(180deg);}
+  
+}
+@-webkit-keyframes shocked {
+  0%,55% { border-width:2px; }
+  65%,90% { border-width:15px; }
+}
+
+@-webkit-keyframes faceMove {
+  50%,90% { transform:rotateY(180deg); }
+}
+
+
+
