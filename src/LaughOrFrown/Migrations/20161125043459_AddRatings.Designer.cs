@@ -8,9 +8,10 @@ using LaughOrFrown.Models;
 namespace LaughOrFrown.Migrations
 {
     [DbContext(typeof(LaughContext))]
-    partial class LaughContextModelSnapshot : ModelSnapshot
+    [Migration("20161125043459_AddRatings")]
+    partial class AddRatings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -85,28 +86,6 @@ namespace LaughOrFrown.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("LaughOrFrown.Models.Rating", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("HotRating");
-
-                    b.Property<int?>("JokeRatedId");
-
-                    b.Property<int>("OffensiveRating");
-
-                    b.Property<string>("UserRatedId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("JokeRatedId");
-
-                    b.HasIndex("UserRatedId");
-
-                    b.ToTable("Ratings");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -221,17 +200,6 @@ namespace LaughOrFrown.Migrations
                     b.HasOne("LaughOrFrown.Models.LaughUser")
                         .WithMany("Jokes")
                         .HasForeignKey("LaughUserId");
-                });
-
-            modelBuilder.Entity("LaughOrFrown.Models.Rating", b =>
-                {
-                    b.HasOne("LaughOrFrown.Models.Joke", "JokeRated")
-                        .WithMany("Ratings")
-                        .HasForeignKey("JokeRatedId");
-
-                    b.HasOne("LaughOrFrown.Models.LaughUser", "UserRated")
-                        .WithMany("Ratings")
-                        .HasForeignKey("UserRatedId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

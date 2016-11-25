@@ -8,6 +8,8 @@ namespace LaughOrFrown.Models
 {
     public class LaughUser : IdentityUser 
     {
-        public ICollection<Joke> Jokes { get; set; } //Jokes navigation property to pull all the jokes uploaded by a user
+        public ICollection<Joke> Jokes { get; set; } //Jokes navigation property to hold all jokes uploaded by the user
+
+        public ICollection<Rating> Ratings { get; set; }
     }
 }

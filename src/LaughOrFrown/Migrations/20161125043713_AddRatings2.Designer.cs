@@ -8,9 +8,10 @@ using LaughOrFrown.Models;
 namespace LaughOrFrown.Migrations
 {
     [DbContext(typeof(LaughContext))]
-    partial class LaughContextModelSnapshot : ModelSnapshot
+    [Migration("20161125043713_AddRatings2")]
+    partial class AddRatings2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -226,11 +227,11 @@ namespace LaughOrFrown.Migrations
             modelBuilder.Entity("LaughOrFrown.Models.Rating", b =>
                 {
                     b.HasOne("LaughOrFrown.Models.Joke", "JokeRated")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("JokeRatedId");
 
                     b.HasOne("LaughOrFrown.Models.LaughUser", "UserRated")
-                        .WithMany("Ratings")
+                        .WithMany()
                         .HasForeignKey("UserRatedId");
                 });
 

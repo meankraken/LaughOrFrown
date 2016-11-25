@@ -35,16 +35,20 @@ namespace LaughOrFrown
             {
                 config.User.RequireUniqueEmail = true;
                 config.Password.RequiredLength = 8;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
                 config.Cookies.ApplicationCookie.LoginPath = "/";
             })
             .AddEntityFrameworkStores<LaughContext>();
 
             services.AddDbContext<LaughContext>();
+            services.AddTransient<LaughContextSeed>();
 
+            services.AddLogging();
             services.AddMvc();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, LaughContextSeed seed)
         {
             loggerFactory.AddConsole();
 
@@ -55,6 +59,7 @@ namespace LaughOrFrown
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug(LogLevel.Information);
             }
 
             app.UseMvc(config =>
@@ -62,6 +67,8 @@ namespace LaughOrFrown
                 config.MapRoute("Default", "{controller}/{action}/{id?}", new { controller = "App", action = "Index" });
                 config.MapRoute("Jokes", "{action}/{id?}", new { controller = "App" });
             });
+
+            seed.EnsureSeeded().Wait();
         }
     }
 }

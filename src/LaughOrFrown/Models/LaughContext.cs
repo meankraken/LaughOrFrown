@@ -19,6 +19,8 @@ namespace LaughOrFrown.Models
 
         public DbSet<Joke> Jokes { get; set; }
 
+        public DbSet<Rating> Ratings { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);

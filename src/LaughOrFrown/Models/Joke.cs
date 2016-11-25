@@ -17,6 +17,6 @@ namespace LaughOrFrown.Models
 
         public string Uploader { get; set; }
 
-        
+        public ICollection<Rating> Ratings { get; set; }
     }
 }
