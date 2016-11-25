@@ -50,6 +50,8 @@ namespace LaughOrFrown
 
             app.UseStaticFiles();
 
+            app.UseIdentity();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
