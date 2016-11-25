@@ -1,0 +1,6 @@
+﻿{
+  "ConnectionStrings": {
+    "LaughContextConnection": "Server=(localdb)\\MSSQLLocalDB;Database=LaughDb;Trusted_Connection=true;MultipleActiveResultSets=true;"
+  }
+    
+}
