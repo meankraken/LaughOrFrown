@@ -8,6 +8,6 @@ namespace LaughOrFrown.Models
 {
     public class LaughUser : IdentityUser 
     {
-        public ICollection<Joke> LikedJokes { get; set; }
+        public ICollection<Joke> Jokes { get; set; }
     }
 }
