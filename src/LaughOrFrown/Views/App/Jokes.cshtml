@@ -18,10 +18,12 @@
 
     @foreach (var Joke in Model)
     {
-        <div class="jokeBox">
-            <h3>@Joke.JokeText</h3>
+        <a asp-action="Joke" asp-route-id=@Joke.Id asp-route-returnurl="@Context.Request.Path">
+            <div class="jokeBox">
+                <h3>@Joke.JokeText</h3>
 
-        </div>
+            </div>
+        </a>
 
     }
 

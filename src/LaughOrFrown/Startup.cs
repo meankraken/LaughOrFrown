@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using LaughOrFrown.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using AutoMapper;
+using LaughOrFrown.ViewModels;
 
 namespace LaughOrFrown
 {
@@ -33,7 +35,7 @@ namespace LaughOrFrown
 
             services.AddIdentity<LaughUser, IdentityRole>(config =>
             {
-                config.User.RequireUniqueEmail = true;
+                config.User.RequireUniqueEmail = false; //no emails needed for this application
                 config.Password.RequiredLength = 8;
                 config.Password.RequireNonAlphanumeric = false;
                 config.Password.RequireUppercase = false;
@@ -57,10 +59,16 @@ namespace LaughOrFrown
 
             app.UseIdentity();
 
+            Mapper.Initialize(config =>
+            {
+                config.CreateMap<Joke, JokeViewModel>().ReverseMap();
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 loggerFactory.AddDebug(LogLevel.Information);
+                app.UseStatusCodePages();
             }
 
             app.UseMvc(config =>

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LaughOrFrown.Models
 {
-    public class LaughRepository : ILaughRepository
+    public class LaughRepository : ILaughRepository //repository for interacting with DB context 
     {
         private LaughContext _context;
 
@@ -14,7 +14,12 @@ namespace LaughOrFrown.Models
             _context = context;
         }
 
-        public IEnumerable<Joke> GetJokes()
+        public Joke GetJoke(int id) //get single joke with id
+        {
+            return _context.Jokes.Where(j => j.Id == id).FirstOrDefault();
+        }
+
+        public IEnumerable<Joke> GetJokes() //get all jokes
         {
             return _context.Jokes.ToList();
         }

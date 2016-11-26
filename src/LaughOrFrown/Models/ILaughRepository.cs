@@ -7,6 +7,9 @@ namespace LaughOrFrown.Models
 {
     public interface ILaughRepository
     {
+        Joke GetJoke(int id);
+
         IEnumerable<Joke> GetJokes(); 
+
     }
 }

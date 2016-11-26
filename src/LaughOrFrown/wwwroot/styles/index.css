@@ -176,16 +176,16 @@
   
 }
 
-.bodyCol:nth-child(2) {
+.bodyCol:nth-child(3) {
   text-align:center;
 }
 
-.bodyCol:nth-child(2) h3 {
+.bodyCol:nth-child(3) h3 {
   font-family:Linden Hill;
   font-weight:600;
 }
 
-.bodyCol:nth-child(2) .authorText {
+.bodyCol:nth-child(3) .authorText {
   position:relative;
   margin-top:36px;
 }
@@ -207,6 +207,7 @@ button {
   margin-top:15px;
   width:75px;
   font-family:Lato;
+  
 }
 
 hr {
@@ -214,7 +215,7 @@ hr {
   width:80%;
 }
 
-.bodyCol:nth-child(3) .authorText {
+.bodyCol:nth-child(2) .authorText {
   top:5px;
 }
 
@@ -230,6 +231,12 @@ hr {
   top:420px;
   right:20px;
   font-family:Lobster;
+}
+
+.validation-summary-errors ul {
+    list-style:none;
+    color:darkred;
+    font-style:italic;
 }
 
 

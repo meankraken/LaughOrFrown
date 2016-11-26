@@ -1,0 +1,29 @@
+﻿@model LaughOrFrown.ViewModels.JokeViewModel 
+
+@{
+    Layout = "_Layout";
+}
+
+<div id="jokeView">
+    <h1 id="jokeText">@Model.JokeText</h1>
+    @if (Model.Punchline.Length>0)
+    {
+        <h2 id="punchline">@Model.Punchline</h2>
+
+    }
+    <hr />
+    <h5>This laugh was brought to you by: </h5>
+    <div class="createdBy">
+        <p>@Model.Uploader</p>
+    </div>
+    
+    <a href="@ViewBag.ReturnUrl">
+        <div class="btn btn-primary btn-lg" id="returnBtn">Back to browsing</div>
+    </a>
+
+</div>
+
+
+
+
+

@@ -34,7 +34,9 @@
                 <h3>"I laughed.. and I'm not sure if that makes me a bad person"</h3>
             </div>
         </div>
+
         <div class="flatBar"></div>
+
         <div class="table">
             <div class="row">
                 <div class="col-md-3 linkBox">
@@ -62,9 +64,11 @@
                     <img src="~/imgs/llama.jpg" />
                 </div>
             </div>
+
             <div id="dateBox">
                 <p id="dateText">Published in Houston, Texas - </p>
             </div>
+
             <div id="bodyRow" class="row">
                 <div class="col-md-4 bodyCol">
                     <h3>"Never take life seriously. Nobody gets out alive anyway."</h3>
@@ -72,38 +76,7 @@
                     <p>When life hands you lemons, squirt the juice into your eyes and laugh about it. At least, this has been our philosophy here at LaughOrFrown since its conception in the year 2016.</p>
                     <p>And yeah, you may be thinking "that's a weird way of dealing with things, you guys are strange". While that may be so, LaughOrFrown's ultimate goal is to build a community of individuals who revel in a good joke, whether at their own expense.. or at the expense of others. </p>
                 </div>
-                <div class="col-md-4 bodyCol">
-                    <h3>"Wait... why does this newspaper have a login form?"</h3>
-                    <p class="authorText">- Nosy Person</p>
-                    <p>Why not? LaughOrFrown is constantly looking for ways to provide the unexpected, and in this case the unexpected takes the form of a form.</p>
 
-                    <form asp-controller="App" asp-action="Login" id="loginForm" method="post">
-                        <div class="inputBox">
-                            <label>Username</label>
-                            <input type="text" name="username" />
-                        </div>
-                        <div class="inputBox">
-                            <label>Password</label>
-                            <input type="password" name="password" />
-                        </div><br />
-                        <button id="loginBtn" type="submit">Login</button>
-                    </form>
-                    <hr />
-                    <p>Not yet a member of our esteemed community? Register below for all the perks.</p>
-
-                    <form asp-controller="App" asp-action="Register" id="registerForm" method="post">
-                        <div class="inputBox">
-                            <label>Username</label>
-                            <input type="text" name="username" />
-                        </div>
-                        <div class="inputBox">
-                            <label>Password</label>
-                            <input type="password" name="password" />
-                        </div><br />
-                        <button id="registerBtn" type="submit">Register</button>
-                    </form>
-
-                </div>
                 <div class="col-md-4 bodyCol">
                     <h3>"So I can say whatever I want as long as it's funny? Awesome!"</h3>
                     <p class="authorText">- Eager Jokester</p>
@@ -121,6 +94,51 @@
                         <div class="smile"></div>
                     </div>
                 </div>
+
+                <div class="col-md-4 bodyCol">
+                    <h3>"Wait... why does this newspaper have a login form?"</h3>
+                    <p class="authorText">- Nosy Person</p>
+                    <p>Why not? LaughOrFrown is constantly looking for ways to provide the unexpected, and in this case the unexpected takes the form of a form.</p>
+
+                    <form asp-controller="App" asp-action="Login" id="loginForm" method="post">
+                        <div class="inputBox">
+                            <label>Username</label>
+                            <input type="text" name="username" />
+                        </div>
+                        <div class="inputBox">
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </div><br />
+                        <button id="loginBtn" type="submit">Login</button>
+                    </form>
+
+                    @if (ViewBag.State == "Login")
+                    {
+                        @Html.ValidationSummary()
+                    }
+
+                    <hr />
+                    <p>Not yet a member of our esteemed community? Register below for all the perks.</p>
+
+                    <form asp-controller="App" asp-action="Register" id="registerForm" method="post">
+                        <div class="inputBox">
+                            <label>Username</label>
+                            <input type="text" name="username" />
+                        </div>
+                        <div class="inputBox">
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </div><br />
+                        <button id="registerBtn" type="submit">Register</button>
+                    </form>
+
+                    @if (ViewBag.State == "Register")
+                    {
+                        @Html.ValidationSummary() 
+                    }
+
+                </div>
+
             </div>
         </div>
     </div>
