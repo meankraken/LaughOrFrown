@@ -8,9 +8,10 @@ using LaughOrFrown.Models;
 namespace LaughOrFrown.Migrations
 {
     [DbContext(typeof(LaughContext))]
-    partial class LaughContextModelSnapshot : ModelSnapshot
+    [Migration("20161125220318_AddRatings4")]
+    partial class AddRatings4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -94,17 +95,19 @@ namespace LaughOrFrown.Migrations
 
                     b.Property<int>("HotRating");
 
-                    b.Property<int?>("JokeId");
+                    b.Property<int>("JokeId");
 
                     b.Property<int>("OffensiveRating");
 
-                    b.Property<string>("UserId");
+                    b.Property<int>("UserId");
+
+                    b.Property<string>("UserRatedId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("JokeId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserRatedId");
 
                     b.ToTable("Ratings");
                 });
@@ -225,13 +228,14 @@ namespace LaughOrFrown.Migrations
 
             modelBuilder.Entity("LaughOrFrown.Models.Rating", b =>
                 {
-                    b.HasOne("LaughOrFrown.Models.Joke", "Joke")
+                    b.HasOne("LaughOrFrown.Models.Joke", "JokeRated")
                         .WithMany("Ratings")
-                        .HasForeignKey("JokeId");
+                        .HasForeignKey("JokeId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("LaughOrFrown.Models.LaughUser", "User")
+                    b.HasOne("LaughOrFrown.Models.LaughUser", "UserRated")
                         .WithMany("Ratings")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserRatedId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using LaughOrFrown.Models;
 
 namespace LaughOrFrown.Controllers
 {
     public class AppController : Controller
     {
+        private ILaughRepository _repo;
+
+        public AppController(ILaughRepository repo)
+        {
+            _repo = repo;
+        }
+
         public IActionResult Index()
         {
             return View(); 
@@ -27,7 +35,10 @@ namespace LaughOrFrown.Controllers
 
         public IActionResult Jokes()
         {
-            return View();
+            var theJokes = _repo.GetJokes();
+            return View(theJokes);
         }
+
+        
     }
 }

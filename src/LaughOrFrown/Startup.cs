@@ -43,6 +43,7 @@ namespace LaughOrFrown
 
             services.AddDbContext<LaughContext>();
             services.AddTransient<LaughContextSeed>();
+            services.AddScoped<ILaughRepository, LaughRepository>();
 
             services.AddLogging();
             services.AddMvc();

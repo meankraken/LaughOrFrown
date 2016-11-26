@@ -61,14 +61,29 @@ namespace LaughOrFrown.Models
                 {
                     _context.Jokes.AddRange(newUser.Jokes);
 
-                    await _context.SaveChangesAsync();
                 }
 
             }
-            
+
             //var testJoke = new Joke() { JokeText = "Test" };
             //_context.Users.Include(p => p.Jokes).Where(u => u.UserName == "admin").FirstOrDefault().Jokes.Add(testJoke);
             //await _context.SaveChangesAsync();
+
+            //create default ratings
+            if (!_context.Ratings.Any())
+            {
+                var defaultRating = new Rating()
+                {
+                    HotRating = 5,
+                    OffensiveRating = 5,
+                    Joke = _context.Jokes.First(),
+                    User = _context.Users.First()
+                };
+
+                _context.Ratings.Add(defaultRating);
+                await _context.SaveChangesAsync();
+            }
+            
 
         }
 

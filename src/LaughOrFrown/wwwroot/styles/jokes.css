@@ -100,8 +100,14 @@
   
 }
 
-#firstBox {
+#homeBox {
   left:2.5%;
+}
+
+.linkBox:hover,.sideBox:hover {
+    cursor:pointer;
+    border-color:#357DDB;
+    color:#357DDB;
 }
 
 #secondBox {
@@ -139,6 +145,10 @@
   margin-right:0;
 }
 
+a {
+    text-decoration:none;
+    color:inherit;
+}
 
 
 

@@ -8,9 +8,10 @@ using LaughOrFrown.Models;
 namespace LaughOrFrown.Migrations
 {
     [DbContext(typeof(LaughContext))]
-    partial class LaughContextModelSnapshot : ModelSnapshot
+    [Migration("20161125222042_AddRatings6")]
+    partial class AddRatings6
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")

@@ -1,16 +1,10 @@
-﻿@{ 
+﻿@model IEnumerable<LaughOrFrown.Models.Joke>
+
+@{
     Layout = "_Layout";
 }
 
 
-<div class="line1"></div>
-<div id="firstBox" class="sideBox">
-    <p>Front Page</p>
-</div>
-<div class="line2"></div>
-<div id="secondBox" class="sideBox">
-    <p>Profile</p>
-</div>
 <div id="jokesView">
     <div class="jokeBox">
         <h3>Why did the chicken cross the road?</h3>
@@ -21,13 +15,18 @@
     <div class="jokeBox">
         <h3>Is this the real life, or is this just fantasy?</h3>
     </div>
-    <div class="jokeBox"></div>
-    <div class="jokeBox"></div>
-    <div class="jokeBox"></div>
-</div>
-    
 
-   
+    @foreach (var Joke in Model)
+    {
+        <div class="jokeBox">
+            <h3>@Joke.JokeText</h3>
+
+        </div>
+
+    }
+
+</div>
+
 
 
 
