@@ -8,6 +8,8 @@ namespace LaughOrFrown.ViewModels
 {
     public class JokeViewModel
     {
+        public int Id { get; set; }
+
         public string JokeText { get; set; }
 
         public string Punchline { get; set; }
@@ -17,5 +19,9 @@ namespace LaughOrFrown.ViewModels
         public string Uploader { get; set; }
 
         public ICollection<Rating> Ratings { get; set; }
+
+        public double HotAverageRating { get; set; }
+
+        public double OffensiveAverageRating { get; set; }
     }
 }

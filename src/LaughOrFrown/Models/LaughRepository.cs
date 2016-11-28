@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace LaughOrFrown.Models
 
         public IEnumerable<Joke> GetJokes() //get all jokes
         {
-            return _context.Jokes.ToList();
+            return _context.Jokes.Include(j => j.Ratings).ToList();
         }
     }
 }

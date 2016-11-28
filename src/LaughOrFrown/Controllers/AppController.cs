@@ -26,9 +26,22 @@ namespace LaughOrFrown.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View(); 
+            var thisUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userStats = new UserStatsViewModel();
+            if (thisUser!=null)
+            {
+                userStats.UserName = thisUser.UserName;
+                userStats.Jokes = thisUser.Jokes;
+                userStats.Ratings = thisUser.Ratings;
+            }
+            else
+            {
+                userStats.UserName = "";
+            }
+
+            return View(userStats); 
         }
 
         [HttpPost]
@@ -49,6 +62,13 @@ namespace LaughOrFrown.Controllers
             }
 
             return View("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -75,10 +95,34 @@ namespace LaughOrFrown.Controllers
             return View("Index");
         }
 
-        public IActionResult Jokes()
+        public IActionResult TopJokes() //return the Jokes View and pass in the jokes ordered by their Hot rating
         {
             var theJokes = _repo.GetJokes();
-            return View(theJokes);
+            var jokesVM = Mapper.Map<IEnumerable<JokeViewModel>>(theJokes);
+
+            foreach (JokeViewModel item in jokesVM)
+            {
+                item.HotAverageRating = getAverageHotRating(item.Ratings);
+                //item.OffensiveAverageRating = getAverageOffensiveRating(item.Ratings);
+            }
+            jokesVM = jokesVM.OrderByDescending(j => j.HotAverageRating);
+
+            return View("Jokes",jokesVM);
+        }
+
+        public IActionResult OffensiveJokes() //return the Jokes View and pass in the jokes ordered by their Offensive rating
+        {
+            var theJokes = _repo.GetJokes();
+            var jokesVM = Mapper.Map<IEnumerable<JokeViewModel>>(theJokes);
+            
+            foreach (JokeViewModel item in jokesVM)
+            {
+                //item.HotAverageRating = getAverageHotRating(item.Ratings);
+                item.OffensiveAverageRating = getAverageOffensiveRating(item.Ratings);
+            }
+            jokesVM = jokesVM.OrderByDescending(j => j.OffensiveAverageRating);
+
+            return View("Jokes", jokesVM);
         }
 
         public IActionResult Joke(int id, string returnurl)
@@ -102,6 +146,26 @@ namespace LaughOrFrown.Controllers
             var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
             return View(jokeViewModel);
         }
-        
+
+        private double getAverageHotRating(ICollection<Rating> ratings) //helper function to get the average hot rating out of a collection of ratings
+        {
+            double average = 0;
+            foreach (var rating in ratings)
+            {
+                average += rating.HotRating;
+            }
+            return average / ratings.Count;
+        }
+
+        private double getAverageOffensiveRating(ICollection<Rating> ratings) //helper function to get the average offensive rating out of a collection of ratings
+        {
+            double average = 0;
+            foreach (var rating in ratings)
+            {
+                average += rating.OffensiveRating;
+            }
+            return average / ratings.Count;
+        }
+
     }
 }

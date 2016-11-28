@@ -13,4 +13,10 @@
         $(this).css('-webkit-filter', '');
     });
 
+    var userRowExists = $('#userPanel');
+   
+    if (!jQuery.isEmptyObject(userRowExists)) {
+        $('.container').css('height', '1250px');
+    }
+
 });

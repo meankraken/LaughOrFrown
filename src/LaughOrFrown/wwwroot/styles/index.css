@@ -149,7 +149,7 @@
 
 .bodyCol {
   border-right:1px solid black;
-  height:670px;
+  height:100%;
   padding-top:15px;
 }
 
@@ -239,9 +239,75 @@ hr {
     font-style:italic;
 }
 
+#userPanel {
+    width:75%;
+    margin:auto;
+}
 
+.panel-heading {
+    text-align:center;
+    font-weight:700;
+    height:35px;
+}
 
+.panel-body {
+    padding:0;
+    
+}
 
+#userPanel .row {
+    height:auto;
+    
+}
+
+.controlsCol:nth-child(1) {
+    border-right:1px solid #e0e0e0;
+    height:auto;
+    padding-top:0;  
+}
+
+.statsCol button {
+    display:inline-block;
+    font-size:small;
+    width:auto;
+    position:relative;
+    height:30px;
+    top:-7px;
+}
+
+.controlsCol a {
+    height:30px;
+}
+
+.statBadges {
+    display: inline-block;
+    margin-left: 5%;
+    float: left;
+}
+
+.controlBtns {
+    display:inline-block;
+    float:right;
+    margin-right:5%;
+    margin-top:8px;
+}
+
+.controlBtns form {
+    float:right;
+    display:inline-block;
+    margin:0;
+    padding:0;
+}
+
+.controlBtns button {
+    display:inline-block;
+    height:30px;
+    width:auto;
+    position:relative;
+    margin:0;
+    margin-left:4px;
+   
+}
 
 
 

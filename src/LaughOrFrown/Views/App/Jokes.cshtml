@@ -1,4 +1,4 @@
-﻿@model IEnumerable<LaughOrFrown.Models.Joke>
+﻿@model IEnumerable<LaughOrFrown.ViewModels.JokeViewModel>
 
 @{
     Layout = "_Layout";
@@ -21,7 +21,7 @@
         <a asp-action="Joke" asp-route-id=@Joke.Id asp-route-returnurl="@Context.Request.Path">
             <div class="jokeBox">
                 <h3>@Joke.JokeText</h3>
-
+                <h6>@Joke.OffensiveAverageRating</h6>
             </div>
         </a>
 
