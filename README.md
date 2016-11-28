@@ -1,2 +1,2 @@
 # LaughOrFrown
-LaughOrFrown application
+LaughOrFrown application - Work in progress
