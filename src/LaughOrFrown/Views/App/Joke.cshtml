@@ -4,6 +4,10 @@
     Layout = "_Layout";
 }
 
+@section styles {
+    <link rel="stylesheet" href="~/styles/joke.css" />
+}
+
 <div id="jokeView">
     <h1 id="jokeText">@Model.JokeText</h1>
     @if (Model.Punchline.Length>0)

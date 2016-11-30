@@ -13,6 +13,7 @@ using LaughOrFrown.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using AutoMapper;
 using LaughOrFrown.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LaughOrFrown
 {
@@ -48,7 +49,10 @@ namespace LaughOrFrown
             services.AddScoped<ILaughRepository, LaughRepository>();
 
             services.AddLogging();
-            services.AddMvc();
+            services.AddMvc(options =>
+            {
+                //options.Filters.Add(new RequireHttpsAttribute()); //need https since app includes authentication
+            });
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, LaughContextSeed seed)

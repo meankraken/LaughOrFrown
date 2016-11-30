@@ -1,22 +1,15 @@
-﻿@model IEnumerable<LaughOrFrown.ViewModels.JokeViewModel>
+﻿@model LaughOrFrown.ViewModels.PagedJokesViewModel
 
 @{
     Layout = "_Layout";
 }
 
+@section styles {
+    <link rel="stylesheet" href="~/styles/jokes.css" />
+}
 
 <div id="jokesView">
-    <div class="jokeBox">
-        <h3>Why did the chicken cross the road?</h3>
-    </div>
-    <div class="jokeBox">
-        <h3>Why did the chicken cross the road testing testing testing blah blah blah blah blahWhy did the chicken cross the road testing testing testing blah blah blah blah blahWhy did the chicken cross the road testing testing testing blah blah blah blah blah</h3>
-    </div>
-    <div class="jokeBox">
-        <h3>Is this the real life, or is this just fantasy?</h3>
-    </div>
-
-    @foreach (var Joke in Model)
+    @foreach (var Joke in Model.Jokes)
     {
         <a asp-action="Joke" asp-route-id=@Joke.Id asp-route-returnurl="@Context.Request.Path">
             <div class="jokeBox">
@@ -27,9 +20,64 @@
 
     }
 
+    <div class="navFooter">
+        <a href="@generateUrl("back")" class="@generateClass("back")">
+            <i class="glyphicon glyphicon-menu-left" id="leftArrow"></i><p class="leftText">Funnier Jokes</p>
+        </a>
+        <a href="@generateUrl("forward")" class="@generateClass("forward")">
+            <i class="glyphicon glyphicon-menu-right" id="rightArrow"></i><p class="rightText">Questionable Content</p>
+        </a>
+    </div>
+
 </div>
 
 
+@section scripts {
+    <script src="~/scripts/jokesScript.js"></script>
+}
+
+
+@functions {
+    private string generateUrl(string direction)
+    {
+        if (direction == "back")
+        {
+            return Context.Request.Path + "?page=" + (Model.currentPage - 1);
+        }
+        else
+        {
+            return Context.Request.Path + "?page=" + (Model.currentPage + 1);
+        }
+    }
+
+    private string generateClass(string direction)
+    {
+        if (direction == "back")
+        {
+            if (Model.hasPreviousPage)
+            {
+                return "";
+            }
+            else
+            {
+                return "greyed";
+            }
+        }
+        else
+        {
+            if (Model.hasNextPage)
+            {
+                return "";
+            }
+            else
+            {
+                return "greyed";
+
+            }
+        }
+    }
+
+}
 
 
 

@@ -1,0 +1,59 @@
+﻿#jokeView {
+    height:40%;
+    margin-top:100px;
+}
+
+#jokeText {
+    font-family:Bangers;
+    text-align:center;
+    font-size:5em;
+}
+
+#punchline {
+    margin-top:50px;
+    font-family:Luckiest Guy;
+    text-align:center;
+    font-size:3.5em;
+    color:#7D7D7D;
+    text-shadow: 1px 1px 2px #696969;
+}
+
+hr {
+    width:85%;
+    border-color:#CFCFCF;
+    margin-top:100px;
+    margin-bottom:100px;
+}
+
+h5 {
+    text-align:center;
+    color:grey;
+}
+
+.createdBy {
+    height:40px;
+    width:100px;
+    border-radius:15px;
+    background-color:#5798AD;
+    margin:auto;
+    color:white;
+    font-family:Lato;
+    text-align:center;
+    text-decoration:underline;
+    font-size:1.2em;
+    line-height:40px;
+}
+
+#returnBtn {
+    display:block;
+    position:absolute;
+    width:200px;
+    bottom:15px;
+    left:50%;
+    transform:translate(-50%,0);
+}
+
+a {
+    text-decoration:none;
+    color:inherit;
+}

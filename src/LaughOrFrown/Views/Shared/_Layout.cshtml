@@ -12,9 +12,12 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Allan" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Bangers" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Luckiest Guy" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lobster" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/styles/jokes.css" />
-
+    <link rel="stylesheet" href="~/styles/topMenu.css" />
+    @RenderSection("styles", required: false)
+    
+    
 </head>
 
 <body>
@@ -31,22 +34,34 @@
                 <p>Profile</p>
             </div>
             <div class="titleBar">
-                <h2 class="titleText">SAMPLE TITLE</h2>
+                <h2 class="titleText">@ViewBag.Title</h2>
             </div>
             <div class="designBar"></div>
             <div class="linkBar">
-                <div class="linkBox">
-                    <h3>Top Jokes</h3>
-                </div>
-                <div class="linkBox">
-                    <h3>Offensive Jokes</h3>
-                </div>
-                <div class="linkBox">
-                    <h3>New Additions</h3>
-                </div>
-                <div class="linkBox">
-                    <h3>Random Reel</h3>
-                </div>
+                <a asp-action="TopJokes">
+                    <div class="@getLinkClass("Top Jokes")">
+                        <h3>Top Jokes</h3>
+                    </div>
+                </a>
+
+                <a asp-action="OffensiveJokes">
+                    <div class="@getLinkClass("Offensive Jokes")">
+                        <h3>Offensive Jokes</h3>
+                    </div>
+                </a>
+
+                <a asp-action="NewJokes">
+                    <div class="@getLinkClass("New Jokes")">
+                        <h3>New Additions</h3>
+                    </div>
+                </a>
+
+                <a asp-action="RandomJoke">
+                    <div class="@getLinkClass("Random Reel")" id="lastBox">
+                        <h3>Random Reel</h3>
+                    </div>
+                </a>
+
             </div>
             
             @RenderBody() 
@@ -54,13 +69,27 @@
         </div>
     </div>
 
-
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    @RenderSection("scripts", false)
 </body>
 
 </html>
 
+@functions {
+    public string getLinkClass(string str)
+    {
+        if (ViewBag.Title == str)
+        {
+            return "linkBox active";
 
+        }
+        else
+        {
+            return "linkBox";
 
+        }
+    }
+}
 
 
 

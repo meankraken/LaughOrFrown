@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ovo" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Fanwood Text" />
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Linden Hill" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Marvel" />
     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="~/styles/index.css" />
     <link rel="stylesheet" type="text/css" href="~/styles/smiles.css" />
@@ -20,6 +21,8 @@
 
 
 <body>
+    @Html.AntiForgeryToken()
+
     <div class="container">
         <div id="headerBar">
             <p>Laugh or Frown</p>
@@ -34,6 +37,56 @@
         </div>
 
         <div class="flatBar"></div>
+
+        @if (!string.IsNullOrEmpty(Model.UserName))
+        {
+            <div id="userPanel" class="panel panel-success">
+                <div class="panel-heading">
+                    Welcome back @Model.UserName!
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-6 controlsCol statsCol">
+                            <span style="font-family:Marvel;border-right:1px solid grey;padding-right:5px;margin-right:15px;margin-top:15px;float:left;font-weight:500">USER STATS</span>
+                            <div class="statBadges">
+                                <button class="btn btn-success">
+                                    Jokes Contributed  <span class="badge">3</span>
+                                </button>
+                                <button class="btn btn-success">
+                                    Ratings Received  <span class="badge">5</span>
+                                </button>
+                                <button class="btn btn-success">
+                                    Ratings Given  <span class="badge">8</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 controlsCol">
+                            <span style="font-family:Marvel;border-left:1px solid grey;padding-left:5px;margin-top:15px;margin-left:15px;float:right">CONTROL PANEL</span>
+                            <div class="controlBtns">
+                                <a class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Joke
+                                </a>
+                                <a class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span> View Profile
+                                </a>
+                                <a class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Report a User
+                                </a>
+                                <form method="post" asp-controller="App" asp-action="Logout">
+                                    <button type="submit" class="btn btn-default">
+                                        Logout
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        }
 
         <div class="table">
             <div class="row">
@@ -53,7 +106,7 @@
                     <div class="titleBar">
                         <p>New additions</p>
                     </div>
-                    <img src="~/imgs/hillary-laughing.jpg" />
+                    <a asp-action="NewJokes"><img src="~/imgs/hillary-laughing.jpg" /></a>
                 </div>
                 <div class="col-md-3 linkBox">
                     <div class="titleBar">
@@ -66,56 +119,6 @@
             <div id="dateBox">
                 <p id="dateText">Published in Houston, Texas - </p>
             </div>
-
-            @if (Model.UserName.Length > 0)
-            {
-                <div id="userPanel" class="panel panel-success">
-                    <div class="panel-heading">
-                        Welcome back @Model.UserName!
-                    </div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-md-6 controlsCol statsCol">
-                                <span style="font-family:Lato;font-size:.8em;border-right:1px solid grey;padding-right:5px;margin-right:15px;margin-top:15px;float:left">USER STATS</span>
-                                <div class="statBadges">
-                                    <button class="btn btn-success">
-                                        Jokes Contributed<span class="badge">3</span>
-                                    </button>
-                                    <button class="btn btn-success">
-                                        Ratings Received <span class="badge">5</span>
-                                    </button>
-                                    <button class="btn btn-success">
-                                        Ratings Given <span class="badge">8</span>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-md-6 controlsCol">
-                                <span style="font-family:Lato;font-size:.8em;border-left:1px solid grey;padding-left:5px;margin-top:15px;margin-left:15px;float:right">CONTROL PANEL</span>
-                                <div class="controlBtns">
-                                    <a class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> New Joke
-                                    </a>
-                                    <a class="btn btn-primary">
-                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span> View Profile
-                                    </a>
-                                    <a class="btn btn-danger">
-                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span> Report a User
-                                    </a>
-                                    <form method="post" asp-controller="App" asp-action="Logout">
-                                        <button type="submit" class="btn btn-default">
-                                            Logout
-                                        </button>
-                                    </form>
-
-                                </div>
-                                
-                            </div>
-                            
-                        </div>
-                    </div>
-
-                </div>
-            }
             
             <div id="bodyRow" class="row">
                 <div class="col-md-4 bodyCol">

@@ -45,6 +45,7 @@ namespace LaughOrFrown.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserViewModel userVM)
         {
             ViewBag.State = "Login"; //used to track if user is loggin in or registering on integrated page 
@@ -61,10 +62,12 @@ namespace LaughOrFrown.Controllers
                 }
             }
 
-            return View("Index");
+            var userStats = new UserStatsViewModel();
+            return View("Index", userStats);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -72,6 +75,7 @@ namespace LaughOrFrown.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserViewModel userVM)
         {
             ViewBag.State = "Register"; //used to track if user is loggin in or registering on integrated page 
@@ -95,8 +99,12 @@ namespace LaughOrFrown.Controllers
             return View("Index");
         }
 
-        public IActionResult TopJokes() //return the Jokes View and pass in the jokes ordered by their Hot rating
+
+
+        //Joke views
+        public IActionResult TopJokes(int page=1) //return the Jokes View and pass in the jokes ordered by their Hot rating
         {
+            ViewBag.Title = "Top Jokes";
             var theJokes = _repo.GetJokes();
             var jokesVM = Mapper.Map<IEnumerable<JokeViewModel>>(theJokes);
 
@@ -105,13 +113,16 @@ namespace LaughOrFrown.Controllers
                 item.HotAverageRating = getAverageHotRating(item.Ratings);
                 //item.OffensiveAverageRating = getAverageOffensiveRating(item.Ratings);
             }
-            jokesVM = jokesVM.OrderByDescending(j => j.HotAverageRating);
+            jokesVM = jokesVM.OrderByDescending(j => j.HotAverageRating).Skip((page-1)*12).Take(12);
 
-            return View("Jokes",jokesVM);
+            var pagedJokes = new PagedJokesViewModel(page, 12, theJokes.Count(), jokesVM); //passing the initialized pagedJokes VM to the view 
+
+            return View("Jokes",pagedJokes);
         }
 
-        public IActionResult OffensiveJokes() //return the Jokes View and pass in the jokes ordered by their Offensive rating
+        public IActionResult OffensiveJokes(int page=1) //return the Jokes View and pass in the jokes ordered by their Offensive rating
         {
+            ViewBag.Title = "Offensive Jokes";
             var theJokes = _repo.GetJokes();
             var jokesVM = Mapper.Map<IEnumerable<JokeViewModel>>(theJokes);
             
@@ -120,13 +131,29 @@ namespace LaughOrFrown.Controllers
                 //item.HotAverageRating = getAverageHotRating(item.Ratings);
                 item.OffensiveAverageRating = getAverageOffensiveRating(item.Ratings);
             }
-            jokesVM = jokesVM.OrderByDescending(j => j.OffensiveAverageRating);
+            jokesVM = jokesVM.OrderByDescending(j => j.OffensiveAverageRating).Skip((page - 1) * 12).Take(12);
 
-            return View("Jokes", jokesVM);
+            var pagedJokes = new PagedJokesViewModel(page, 12, theJokes.Count(), jokesVM);
+
+            return View("Jokes", pagedJokes);
+        } 
+
+        public IActionResult NewJokes(int page=1) //return the Jokes View and pass in the jokes ordered by date submitted
+        {
+            ViewBag.Title = "New Jokes";
+            var theJokes = _repo.GetJokes();
+            var jokesVM = Mapper.Map<IEnumerable<JokeViewModel>>(theJokes);
+
+            jokesVM = jokesVM.OrderByDescending(j => j.DateCreated).Skip((page - 1) * 12).Take(12);
+
+            var pagedJokes = new PagedJokesViewModel(page, 12, theJokes.Count(), jokesVM);
+
+            return View("Jokes", pagedJokes);
         }
 
         public IActionResult Joke(int id, string returnurl)
         {
+            ViewBag.Title = "Just A Joke";
             var theJoke = _repo.GetJoke(id);
 
             if (theJoke == null)
@@ -147,6 +174,9 @@ namespace LaughOrFrown.Controllers
             return View(jokeViewModel);
         }
 
+
+
+        //helper functions
         private double getAverageHotRating(ICollection<Rating> ratings) //helper function to get the average hot rating out of a collection of ratings
         {
             double average = 0;
