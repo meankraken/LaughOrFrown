@@ -15,7 +15,7 @@
 
     var userRowExists = $('#userPanel');
    
-    if (!jQuery.isEmptyObject(userRowExists)) {
+    if (!(userRowExists.length == 0)) {
         $('.container').css('height', '1250px');
     }
 

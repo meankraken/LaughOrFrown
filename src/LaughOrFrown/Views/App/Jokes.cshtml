@@ -20,39 +20,43 @@
 
     }
 
-    <div class="navFooter">
-        <a href="@generateUrl("back")" class="@generateClass("back")">
-            <i class="glyphicon glyphicon-menu-left" id="leftArrow"></i>
-            <p class="leftText">
-                @if (ViewBag.Title == "New Jokes")
-                {
-                    <text>Fresh Jokes</text>
-                }
-                else
-                {
-                    <text>Funnier Jokes</text>
-
-                }
-
-            </p>
-        </a>
-        <a href="@generateUrl("forward")" class="@generateClass("forward")">
-            <i class="glyphicon glyphicon-menu-right" id="rightArrow"></i>
-            <p class="rightText">
-                @if (ViewBag.Title == "New Jokes")
-                {
-                    <text>A Bit Stale</text>
-                }
-                else
-                {
-                    <text>Questionable Content</text>
-
-                }
-            </p>
-        </a>
-    </div>
 
 </div>
+
+<div class="navFooter">
+    <a href="@generateUrl("back")" class="@generateClass("back")">
+        <i class="glyphicon glyphicon-menu-left" id="leftArrow"></i>
+        <p class="leftText">
+            @if (ViewBag.Title == "New Jokes")
+            {
+                <text>Fresh Jokes</text>
+            }
+            else
+            {
+                <text>Funnier Jokes</text>
+
+            }
+
+        </p>
+    </a>
+    <a href="@generateUrl("forward")" class="@generateClass("forward")">
+        <i class="glyphicon glyphicon-menu-right" id="rightArrow"></i>
+        <p class="rightText">
+            @if (ViewBag.Title == "New Jokes")
+            {
+                <text>A Bit Stale</text>
+            }
+            else
+            {
+                <text>Questionable Content</text>
+
+            }
+        </p>
+    </a>
+</div>
+
+
+
 
 
 @section scripts {

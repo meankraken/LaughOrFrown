@@ -1,16 +1,15 @@
 ﻿#jokesView {
   position:relative;
-  top:5%;
+  top:75px;
   width:95%;
-  height:80%;
+  height:750px;
   left:50%;
   transform:translate(-50%,0);
-  
 }
 
 .jokeBox {
   display:inline-block;
-  height:20%;
+  height:150px;
   width:33%;
   float:left;
   margin-right:.3%;
@@ -36,12 +35,12 @@ a {
 }
 
 .navFooter {
-    position:absolute;
+    position:relative;
     width:630px;
     height:80px; 
-    bottom:0;
     left:50%;
-    transform:translate(-50%);    
+    transform:translate(-50%,0);    
+    bottom:20px;
 }
 
 #leftArrow {
