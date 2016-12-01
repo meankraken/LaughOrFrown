@@ -26,7 +26,7 @@ namespace LaughOrFrown.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index() //main page + login / register form 
         {
             var thisUser = await _userManager.GetUserAsync(HttpContext.User);
             var userStats = new UserStatsViewModel();
@@ -78,7 +78,7 @@ namespace LaughOrFrown.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(UserViewModel userVM)
         {
-            ViewBag.State = "Register"; //used to track if user is loggin in or registering on integrated page 
+            ViewBag.State = "Register"; //used to track if user is logging in or registering on integrated page 
             if (ModelState.IsValid)
             {
                 var newUser = new LaughUser { UserName = userVM.Username };
@@ -151,7 +151,7 @@ namespace LaughOrFrown.Controllers
             return View("Jokes", pagedJokes);
         }
 
-        public IActionResult Joke(int id, string returnurl)
+        public IActionResult Joke(int id, string returnurl) //single joke page
         {
             ViewBag.Title = "Just A Joke";
             var theJoke = _repo.GetJoke(id);
@@ -163,7 +163,7 @@ namespace LaughOrFrown.Controllers
 
             if (returnurl == null)
             {
-                ViewBag.ReturnUrl = Url.Action("Jokes");
+                ViewBag.ReturnUrl = Url.Action("TopJokes");
             }
             else
             {
@@ -174,6 +174,23 @@ namespace LaughOrFrown.Controllers
             return View(jokeViewModel);
         }
 
+        public IActionResult Random() //produce random joke
+        {
+            ViewBag.Title = "So random...";
+
+            var jokes = _repo.GetJokes();
+            var count = jokes.Count();
+
+            var rand = new Random();
+            var index = rand.Next(count); //grab a random joke index
+
+            var theJoke = jokes.ElementAt(index);
+
+            ViewBag.ReturnUrl = Url.Action("TopJokes");
+            
+            var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
+            return View("Joke", jokeViewModel);
+        }
 
 
         //helper functions

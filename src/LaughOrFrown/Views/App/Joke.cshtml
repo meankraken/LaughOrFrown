@@ -1,4 +1,4 @@
-﻿@model LaughOrFrown.ViewModels.JokeViewModel 
+﻿@model LaughOrFrown.ViewModels.JokeViewModel
 
 @{
     Layout = "_Layout";
@@ -10,7 +10,7 @@
 
 <div id="jokeView">
     <h1 id="jokeText">@Model.JokeText</h1>
-    @if (Model.Punchline.Length>0)
+    @if (Model.Punchline.Length > 0)
     {
         <h2 id="punchline">@Model.Punchline</h2>
 
@@ -20,14 +20,21 @@
     <div class="createdBy">
         <p>@Model.Uploader</p>
     </div>
-    
+
+    @if (ViewBag.Title == "So random...")
+    {
+        <a asp-action="Random">
+            <div class="btn btn-primary btn-lg" id="returnBtn">Another One!</div>
+        </a>
+
+    }
+    else
+    {
     <a href="@ViewBag.ReturnUrl">
         <div class="btn btn-primary btn-lg" id="returnBtn">Back to browsing</div>
     </a>
+    }
 
 </div>
-
-
-
 
 

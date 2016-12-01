@@ -51,7 +51,7 @@ namespace LaughOrFrown
             services.AddLogging();
             services.AddMvc(options =>
             {
-                //options.Filters.Add(new RequireHttpsAttribute()); //need https since app includes authentication
+                //options.Filters.Add(new RequireHttpsAttribute()); 
             });
         }
 
