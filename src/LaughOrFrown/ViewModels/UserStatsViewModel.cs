@@ -13,5 +13,11 @@ namespace LaughOrFrown.ViewModels
         public ICollection<Joke> Jokes { get; set; }
 
         public ICollection<Rating> Ratings { get; set; }
+
+        public UserStatsViewModel()
+        {
+            Jokes = new List<Joke>();
+
+        }
     }
 }

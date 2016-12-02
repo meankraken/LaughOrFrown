@@ -24,5 +24,10 @@ namespace LaughOrFrown.Models
         {
             return _context.Jokes.Include(j => j.Ratings).ToList();
         }
+
+        public LaughUser GetUser(string id)
+        {
+            return _context.Users.Include(j => j.Ratings).Include(i => i.Jokes).ThenInclude(l => l.Ratings).Where(k => k.Id == id).FirstOrDefault(); //eager loading multiple levels
+        }
     }
 }

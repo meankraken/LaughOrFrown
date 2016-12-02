@@ -50,13 +50,14 @@
                             <span style="font-family:Marvel;border-right:1px solid grey;padding-right:5px;margin-right:15px;margin-top:15px;float:left;font-weight:500">USER STATS</span>
                             <div class="statBadges">
                                 <button class="btn btn-success">
-                                    Jokes Contributed  <span class="badge">3</span>
+                                    Jokes Contributed <span class="badge">@Model.Jokes.Count()</span>
+                                </button>
+
+                                <button class="btn btn-success">
+                                    Ratings Received  <span class="badge">@ratingsReceived()</span>
                                 </button>
                                 <button class="btn btn-success">
-                                    Ratings Received  <span class="badge">5</span>
-                                </button>
-                                <button class="btn btn-success">
-                                    Ratings Given  <span class="badge">8</span>
+                                    Ratings Given  <span class="badge">@Model.Ratings.Count()</span>
                                 </button>
                             </div>
                         </div>
@@ -200,3 +201,21 @@
 </body>
 
 </html>
+
+
+
+@functions {
+    private int ratingsReceived() //helper function to get number of received ratings for logged in user 
+    {
+        var count = 0;
+        foreach (var joke in Model.Jokes)
+        {
+            count += joke.Ratings.Count();
+
+        }
+        return count;
+    }
+}
+
+
+

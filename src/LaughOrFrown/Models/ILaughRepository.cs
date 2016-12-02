@@ -9,7 +9,9 @@ namespace LaughOrFrown.Models
     {
         Joke GetJoke(int id);
 
-        IEnumerable<Joke> GetJokes(); 
+        IEnumerable<Joke> GetJokes();
+
+        LaughUser GetUser(string id);
 
     }
 }

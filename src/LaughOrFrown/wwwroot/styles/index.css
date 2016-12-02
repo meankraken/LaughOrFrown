@@ -275,32 +275,33 @@ hr {
     position:relative;
     height:30px;
     top:-7px;
-    font-family:Marvel;
+    font-family:Lato;
     letter-spacing:1px;
+    font-size:.85em;
 }
 
 .controlsCol a {
     height:30px;
+    font-size:.85em;
+    
 }
 
 .statBadges {
     display: inline-block;
     margin-left: 5%;
-    float: left;
+    float: right;
     
 }
 
 .controlBtns {
     display:inline-block;
-    float:right;
     margin-right:5%;
     margin-top:8px;
-    font-family:Marvel;
+    font-family:Lato;
     letter-spacing:1px;
 }
 
 .controlBtns form {
-    float:right;
     display:inline-block;
     margin:0;
     padding:0;
@@ -312,9 +313,11 @@ hr {
     width:auto;
     position:relative;
     margin:0;
-    margin-left:4px;
-    font-family:Marvel;
+    font-family:Lato;
     letter-spacing:1px;
+    line-height:5px;
+    font-size:.85em;
+    
 }
 
 

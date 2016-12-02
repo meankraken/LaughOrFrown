@@ -26,9 +26,10 @@ namespace LaughOrFrown.Controllers
             _logger = logger;
         }
 
-        public async Task<IActionResult> Index() //main page + login / register form 
+        public IActionResult Index() //main page + login / register form 
         {
-            var thisUser = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var thisUser = _repo.GetUser(userId);
             var userStats = new UserStatsViewModel();
             if (thisUser!=null)
             {
