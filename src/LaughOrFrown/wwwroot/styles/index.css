@@ -9,6 +9,18 @@
   padding-right:5px;
 }
 
+.mask {
+    position:absolute;
+    top:0;
+    left:0;
+    height:1300px;
+    width:100%;
+    opacity:.5;
+    background-color:black;
+    z-index:99;
+    display:none;
+}
+
 #headerBar {
   position:relative;
   top:0;
@@ -320,6 +332,61 @@ hr {
     
 }
 
+.jokeSubmitContainer {
+  position:absolute;
+  background-image:url("https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-322470.jpg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  left:50%;
+  transform:translate(-50%,0);
+  height:600px;  
+  width:600px;
+  box-shadow:0px 0px 5px 2px #4f4f4f;
+  display:none;
+  z-index:101;
+}
+
+.jokeSubmitContainer h3 {
+  display:block;
+  text-align:center;
+  font-family:Abel;
+  font-size:3em;
+  color:#565656;
+}
+
+.jokeSubmitContainer hr {
+  opacity:.8;
+  width:300px;
+  border-color:black;
+}
+
+#jokeForm {
+  height:475px;
+  width:500px;
+  background-color:rgba(48,48,48,.4);
+  margin:auto;
+  border-radius:10px;
+  margin-top:25px;
+  padding:15px;
+}
+
+#jokeForm label {
+  color:#d8d8d8;
+}
+
+#punchline {
+    resize:none;
+}
+
+#jokeTextError {
+    display:none;
+    color:white;
+}
+
+#punchlineError {
+    display:none;
+    color:white;
+}
 
 
 

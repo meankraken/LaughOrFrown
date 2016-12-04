@@ -13,5 +13,8 @@ namespace LaughOrFrown.Models
 
         LaughUser GetUser(string id);
 
+        void AddJoke(Joke joke);
+
+        Task<bool> Save();
     }
 }

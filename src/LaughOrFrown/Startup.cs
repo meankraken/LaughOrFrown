@@ -66,6 +66,7 @@ namespace LaughOrFrown
             Mapper.Initialize(config =>
             {
                 config.CreateMap<Joke, JokeViewModel>().ReverseMap();
+                config.CreateMap<AddJokeViewModel, Joke>();
             });
 
             if (env.IsDevelopment())

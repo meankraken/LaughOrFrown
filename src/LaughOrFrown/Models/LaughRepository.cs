@@ -15,6 +15,12 @@ namespace LaughOrFrown.Models
             _context = context;
         }
 
+        public void AddJoke(Joke joke) //add joke
+        {
+            _context.Jokes.Add(joke);
+            _context.Users.Where(u => u.UserName == joke.Uploader).FirstOrDefault().Jokes.Add(joke); //add joke to the user's jokes navigation collection as well  
+        }
+
         public Joke GetJoke(int id) //get single joke with id
         {
             return _context.Jokes.Where(j => j.Id == id).FirstOrDefault();
@@ -28,6 +34,11 @@ namespace LaughOrFrown.Models
         public LaughUser GetUser(string id)
         {
             return _context.Users.Include(j => j.Ratings).Include(i => i.Jokes).ThenInclude(l => l.Ratings).Where(k => k.Id == id).FirstOrDefault(); //eager loading multiple levels
+        }
+
+        public async Task<bool> Save() //save changes
+        {
+            return (await _context.SaveChangesAsync() > 0);
         }
     }
 }

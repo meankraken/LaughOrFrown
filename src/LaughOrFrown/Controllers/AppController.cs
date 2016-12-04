@@ -47,6 +47,43 @@ namespace LaughOrFrown.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Index(AddJokeViewModel theJoke)
+        {
+            var userId = _userManager.GetUserId(HttpContext.User);
+            var thisUser = _repo.GetUser(userId);
+            var userStats = new UserStatsViewModel();
+            if (thisUser != null)
+            {
+                userStats.UserName = thisUser.UserName;
+                userStats.Jokes = thisUser.Jokes;
+                userStats.Ratings = thisUser.Ratings;
+            }
+            else
+            {
+                userStats.UserName = "";
+            }
+
+            if (ModelState.IsValid)
+            {
+                var jokeToAdd = Mapper.Map<Joke>(theJoke);
+
+                jokeToAdd.DateCreated = DateTime.Now;
+                jokeToAdd.Uploader = _userManager.GetUserName(HttpContext.User);
+
+                _repo.AddJoke(jokeToAdd);
+                if (await _repo.Save())
+                {
+                    return RedirectToAction("Joke", new { id = jokeToAdd.Id });
+                }
+
+                
+            }
+
+            return View(userStats);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(UserViewModel userVM)
         {
             ViewBag.State = "Login"; //used to track if user is loggin in or registering on integrated page 
@@ -101,8 +138,7 @@ namespace LaughOrFrown.Controllers
         }
 
 
-
-        //Joke views
+        //Generate joke views
         public IActionResult TopJokes(int page=1) //return the Jokes View and pass in the jokes ordered by their Hot rating
         {
             ViewBag.Title = "Top Jokes";
@@ -192,6 +228,7 @@ namespace LaughOrFrown.Controllers
             var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
             return View("Joke", jokeViewModel);
         }
+
 
 
         //helper functions
