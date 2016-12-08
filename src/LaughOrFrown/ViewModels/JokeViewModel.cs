@@ -23,5 +23,7 @@ namespace LaughOrFrown.ViewModels
         public double HotAverageRating { get; set; }
 
         public double OffensiveAverageRating { get; set; }
+
+        public Rating UsersRating { get; set; }
     }
 }

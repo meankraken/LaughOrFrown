@@ -8,6 +8,7 @@ using AutoMapper;
 using LaughOrFrown.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LaughOrFrown.Controllers
 {
@@ -134,7 +135,8 @@ namespace LaughOrFrown.Controllers
                 }
             }
 
-            return View("Index");
+            var userStats = new UserStatsViewModel();
+            return View("Index", userStats);
         }
 
 
@@ -188,9 +190,10 @@ namespace LaughOrFrown.Controllers
             return View("Jokes", pagedJokes);
         }
 
-        public IActionResult Joke(int id, string returnurl) //single joke page
+        public async Task<IActionResult> Joke(int id, string returnurl) //single joke page
         {
             ViewBag.Title = "Just A Joke";
+            var theUser = await _userManager.GetUserAsync(HttpContext.User);
             var theJoke = _repo.GetJoke(id);
 
             if (theJoke == null)
@@ -208,6 +211,77 @@ namespace LaughOrFrown.Controllers
             }
 
             var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
+            jokeViewModel.HotAverageRating = getAverageHotRating(jokeViewModel.Ratings);
+            jokeViewModel.OffensiveAverageRating = getAverageOffensiveRating(jokeViewModel.Ratings);
+
+            var usersRating = new Rating();
+
+            foreach (var rating in jokeViewModel.Ratings)
+            {
+                if (rating.User == theUser)
+                {
+                    usersRating = rating;
+                }
+            }
+
+            if (usersRating.User != null)
+            {
+                jokeViewModel.UsersRating = usersRating;
+            }
+
+            return View(jokeViewModel);
+        }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Joke(RatingViewModel rating) //submit rating for joke
+        {
+            ViewBag.Title = "Just A Joke";
+            ViewBag.ReturnUrl = Url.Action("TopJokes");
+            var theUser = await _userManager.GetUserAsync(HttpContext.User);
+
+            var theJoke = _repo.GetJoke(rating.JokeId);
+            var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
+            jokeViewModel.HotAverageRating = getAverageHotRating(jokeViewModel.Ratings);
+            jokeViewModel.OffensiveAverageRating = getAverageOffensiveRating(jokeViewModel.Ratings);
+
+            if (!ModelState.IsValid)
+            {
+                ModelState.ClearValidationState("HotRating");
+                ModelState.ClearValidationState("OffensiveRating");
+                ModelState.AddModelError("", "Must select a hot and offensiveness rating.");
+            }
+            else
+            {
+                var existingRating = new Rating();
+
+                foreach (var item in theJoke.Ratings)
+                {
+                    if (item.User == theUser)
+                    {
+                        existingRating = item;
+                    }
+                }
+
+                if (existingRating.User != null)
+                {
+                    _repo.UpdateRating(existingRating.Id, rating.HotRating, rating.OffensiveRating);
+                }
+                else
+                {
+                    var jokeRating = Mapper.Map<Rating>(rating);
+                    jokeRating.User = theUser;
+                    jokeRating.Joke = theJoke;
+                    _repo.AddRating(jokeRating);
+                }
+
+                if (await _repo.Save())
+                {
+                    return RedirectToAction("Joke");
+                }
+            }
+
             return View(jokeViewModel);
         }
 
@@ -234,6 +308,11 @@ namespace LaughOrFrown.Controllers
         //helper functions
         private double getAverageHotRating(ICollection<Rating> ratings) //helper function to get the average hot rating out of a collection of ratings
         {
+            if (ratings.Count == 0)
+            {
+                return -1;
+            }
+
             double average = 0;
             foreach (var rating in ratings)
             {
@@ -244,6 +323,11 @@ namespace LaughOrFrown.Controllers
 
         private double getAverageOffensiveRating(ICollection<Rating> ratings) //helper function to get the average offensive rating out of a collection of ratings
         {
+            if (ratings.Count == 0)
+            {
+                return -1;
+            }
+
             double average = 0;
             foreach (var rating in ratings)
             {

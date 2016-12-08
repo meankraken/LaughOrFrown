@@ -46,11 +46,75 @@ h5 {
     line-height:40px;
 }
 
+#ratingBox {
+    height:270px;
+    width:500px;
+    margin:auto;
+    margin-top:50px;
+    border:1px dashed #bcbcbc;
+    background-color:#f4f4ed;
+    border-radius:15px;
+}
+
+#ratingBox h3 {
+    font-family:Luckiest Guy;
+    text-align:center;
+    letter-spacing:1px;
+    
+}
+
+#ratingBox h5 {
+    text-align:center;
+    color:black;
+    font-family:Lato;
+    margin-bottom:0;
+}
+
+#ratingBox h1 {
+    text-align:center;
+    font-size:4em;
+    color:#25ce4f;
+    font-family:Luckiest Guy;
+    margin-top:0;
+}
+
+.ratingSelect {
+    margin:auto;
+    width:100px;
+    font-family:Impact;
+    text-align:center; 
+}
+
+.ratingCaption {
+    text-align:center;
+    font-family:snippet;
+    margin-top:5px;
+    width:100%;
+    left:0;
+}
+
+#caption1 {
+    position:absolute;
+    color:#25ce4f;
+}
+
+#caption2 {
+    color:#cc340e;
+    position:absolute;
+}
+
+#ratingBox #rateBtn {
+    position:relative;
+    width:auto; 
+    top:35px;
+}
+
+
 #returnBtn {
     display:block;
     position:relative;
     width:200px;
-    margin-top:200px;
+    margin-top:50px;
     left:50%;
     transform:translate(-50%,0);
 }
@@ -64,3 +128,22 @@ a {
     border-color:#357DDB;
     color:#357DDB;
 }
+
+.validation-summary-errors {
+    color:#d13a3a;
+    margin-top:15px;
+    margin-right:15px;
+}
+
+.validation-summary-errors li {
+    text-align:center;
+    list-style-type: none;
+    list-style-position:inside;
+    margin:0;
+    padding:0;
+    
+}
+
+
+
+

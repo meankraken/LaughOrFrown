@@ -15,6 +15,11 @@ namespace LaughOrFrown.Models
 
         void AddJoke(Joke joke);
 
+        void AddRating(Rating rating);
+
+        void UpdateRating(int id, int hotRating, int offensiveRating);
+
         Task<bool> Save();
+
     }
 }

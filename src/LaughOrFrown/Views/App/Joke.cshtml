@@ -5,28 +5,115 @@
 }
 
 @section styles {
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Snippet" />
     <link rel="stylesheet" href="~/styles/joke.css" />
 }
 
 <div id="jokeView">
+    @Html.AntiForgeryToken()
+
     <h1 id="jokeText">@Model.JokeText</h1>
     @if (Model.Punchline.Length > 0)
     {
         <h2 id="punchline">@Model.Punchline</h2>
 
     }
+
     <hr />
+
     <h5>This laugh was brought to you by: </h5>
     <div class="createdBy">
         <p>@Model.Uploader</p>
     </div>
+
+    <div id="ratingBox">
+        <h3>Liked it? Hated it? Rate it!</h3>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h5>HOT RATING: </h5>
+            </div>
+            <div class="col-md-6">
+                <h5>OFFENSIVE RATING: </h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                    @if (Model.HotAverageRating == -1)
+                    {
+                        <h1>N/A</h1>
+                    }
+                    else
+                    {
+                        <h1>@Model.HotAverageRating</h1>
+
+                    }
+
+            </div>
+            <div class="col-md-6">
+                @if (Model.HotAverageRating == -1)
+                {
+                    <h1 style="color:#cc340e">N/A</h1>
+                }
+                else
+                {
+                    <h1 style="color:#cc340e">@Model.OffensiveAverageRating</h1>
+                }
+            </div>
+        </div>
+        <form method="post" asp-controller="App" asp-action="Joke">
+            <div class="row">
+                <div class="col-md-6">
+                    <select name="HotRating" class="form-control ratingSelect" id="hotSelect">
+                        <!option value="" @(Model.UsersRating == null ? "selected" : "")></!option>
+                        <!option value="1" @(Model.UsersRating!=null && Model.UsersRating.HotRating == 1 ? "selected" : "")>1</!option>
+                        <!option value="2" @(Model.UsersRating!=null && Model.UsersRating.HotRating == 2 ? "selected" : "")>2</!option>
+                        <!option value="3" @(Model.UsersRating!=null && Model.UsersRating.HotRating == 3 ? "selected" : "")>3</!option>
+                        <!option value="4" @(Model.UsersRating!=null && Model.UsersRating.HotRating == 4 ? "selected" : "")>4</!option>
+                        <!option value="5" @(Model.UsersRating!=null && Model.UsersRating.HotRating == 5 ? "selected" : "")>5</!option>
+                    </select>
+                    <p class="ratingCaption" id="caption1"></p>
+                </div>
+                <div class="col-md-6">
+                    <select name="OffensiveRating" class="form-control ratingSelect" id="offensiveSelect">
+                        <!option value="" @(Model.UsersRating == null ? "selected" : "")></!option>
+                        <!option value="1" @(Model.UsersRating != null && Model.UsersRating.OffensiveRating == 1 ? "selected" : "")>1</!option>
+                        <!option value="2" @(Model.UsersRating != null && Model.UsersRating.OffensiveRating == 2 ? "selected" : "")>2</!option>
+                        <!option value="3" @(Model.UsersRating != null && Model.UsersRating.OffensiveRating == 3 ? "selected" : "")>3</!option>
+                        <!option value="4" @(Model.UsersRating != null && Model.UsersRating.OffensiveRating == 4 ? "selected" : "")>4</!option>
+                        <!option value="5" @(Model.UsersRating != null && Model.UsersRating.OffensiveRating == 5 ? "selected" : "")>5</!option>
+                    </select>
+                    <p class="ratingCaption" id="caption2"></p>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="height:50px;">
+                    <input name="JokeId" value="@Model.Id" hidden/>
+
+                    @if (Model.UsersRating != null)
+                    {
+                        <button type="submit" id="rateBtn" class="btn btn-default center-block" disabled>Change Rating</button>
+                    }
+                    else
+                    {
+                        <button type="submit" id="rateBtn" class="btn btn-default center-block" disabled>Rate</button>
+
+                    }
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+    @Html.ValidationSummary()
 
     @if (ViewBag.Title == "So random...")
     {
         <a asp-action="Random">
             <div class="btn btn-primary btn-lg" id="returnBtn">Another One!</div>
         </a>
-
     }
     else
     {
@@ -36,5 +123,62 @@
     }
 
 </div>
+
+@section scripts {
+    <script src="~/scripts/jokeScript.js"></script>
+}
+
+@functions {
+    public string HotSelect(int value) //helper function to set user's selected hot rating if it exists  
+    {
+        if (Model.UsersRating == null)
+        {
+            if (value == -1)
+            {
+                return "selected";
+
+            }
+            else return "";
+
+        }
+        else
+        {
+            if (Model.UsersRating.HotRating == value)
+            {
+                return "selected";
+
+            }
+            else return "";
+
+        }
+    }
+
+    public string OffensiveSelect(int value) //helper function to set user's selected offensiveness rating if it exists  
+    {
+        if (Model.UsersRating == null)
+        {
+            if (value == -1)
+            {
+                return "selected";
+
+            }
+            else return "";
+
+        }
+        else
+        {
+            if (Model.UsersRating.OffensiveRating == value)
+            {
+                return "selected";
+
+            }
+            else return "";
+
+        }
+    }
+
+
+}
+
 
 
