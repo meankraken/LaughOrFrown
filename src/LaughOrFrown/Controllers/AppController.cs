@@ -285,9 +285,10 @@ namespace LaughOrFrown.Controllers
             return View(jokeViewModel);
         }
 
-        public IActionResult Random() //produce random joke
+        public async Task<IActionResult> Random() //produce random joke
         {
             ViewBag.Title = "So random...";
+            var theUser = await _userManager.GetUserAsync(HttpContext.User);
 
             var jokes = _repo.GetJokes();
             var count = jokes.Count();
@@ -300,6 +301,24 @@ namespace LaughOrFrown.Controllers
             ViewBag.ReturnUrl = Url.Action("TopJokes");
             
             var jokeViewModel = Mapper.Map<JokeViewModel>(theJoke);
+            jokeViewModel.HotAverageRating = getAverageHotRating(jokeViewModel.Ratings);
+            jokeViewModel.OffensiveAverageRating = getAverageOffensiveRating(jokeViewModel.Ratings);
+
+            var usersRating = new Rating();
+
+            foreach (var rating in jokeViewModel.Ratings)
+            {
+                if (rating.User == theUser)
+                {
+                    usersRating = rating;
+                }
+            }
+
+            if (usersRating.User != null)
+            {
+                jokeViewModel.UsersRating = usersRating;
+            }
+
             return View("Joke", jokeViewModel);
         }
 
