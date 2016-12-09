@@ -63,4 +63,21 @@
         }
     });
 
+    //info popup
+    $('#ratingBox i').hover(function () {
+        $('.triangle').stop().toggle();
+        $('.infoBox').stop().animate({
+            width: "200px"        
+        }, 500, function () {
+            $('.infoBox p').fadeIn();
+        });
+    }, function () {
+        $('.infoBox p').css('display', 'none');
+        $('.infoBox').stop().animate({
+            width: "0px"
+        }, 200, function () {
+            $('.triangle').toggle();
+        });
+    });
+
 });
