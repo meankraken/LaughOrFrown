@@ -35,8 +35,6 @@
     text-align:center;
     width:100%;
     font-family:Pacifico;
-    z-index:5;
-    
 }
 
 .laughText h1 {
@@ -54,10 +52,11 @@
 }
 
 .navLinks {
+    position:relative;
     clear:both;
     text-align:center;
     font-family:Lato;
-    z-index:99;
+    top:5px;
 }
 
 .active {
