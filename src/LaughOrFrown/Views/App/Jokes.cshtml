@@ -14,7 +14,18 @@
         <a asp-action="Joke" asp-route-id=@Joke.Id asp-route-returnurl="@Context.Request.Path">
             <div class="jokeBox">
                 <h3>@Joke.JokeText</h3>
-                <h6>@Joke.OffensiveAverageRating</h6>
+                @if (ViewBag.Title == "Offensive Jokes")
+                {
+                    <h5>Offensive rating: <span class="ratingText">@(Joke.OffensiveAverageRating >= 0 ? Joke.OffensiveAverageRating.ToString() : "Not rated")</span></h5>
+                }
+                else if (ViewBag.Title == "Top Jokes")
+                {
+                    <h5>Hot rating: <span class="ratingText">@(Joke.HotAverageRating >= 0 ? Joke.HotAverageRating.ToString() : "Not rated")</span></h5>
+                }
+                else
+                {
+                    <h5>Date uploaded: <span class="ratingText">@Joke.DateCreated</span></h5>
+                }
             </div>
         </a>
 

@@ -8,9 +8,10 @@ using LaughOrFrown.Models;
 namespace LaughOrFrown.Migrations
 {
     [DbContext(typeof(LaughContext))]
-    partial class LaughContextModelSnapshot : ModelSnapshot
+    [Migration("20161212004527_Update user schema")]
+    partial class Updateuserschema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.1")
@@ -83,7 +84,7 @@ namespace LaughOrFrown.Migrations
                     b.Property<string>("UserName")
                         .HasAnnotation("MaxLength", 256);
 
-                    b.Property<string>("ZipCode");
+                    b.Property<int>("ZipCode");
 
                     b.HasKey("Id");
 

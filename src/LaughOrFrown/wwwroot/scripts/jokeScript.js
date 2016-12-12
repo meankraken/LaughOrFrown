@@ -27,7 +27,7 @@
                 hotCaption.text("[Now that's funny]");
                 break;
             case 5:
-                hotCaption.text("[The coveted out loud laugh]");
+                hotCaption.text("[The coveted laugh out loud]");
                 break;
             default:
                 hotCaption.text("");

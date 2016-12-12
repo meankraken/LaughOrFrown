@@ -68,6 +68,7 @@ namespace LaughOrFrown
                 config.CreateMap<Joke, JokeViewModel>().ReverseMap();
                 config.CreateMap<AddJokeViewModel, Joke>();
                 config.CreateMap<RatingViewModel, Rating>();
+                config.CreateMap<ProfileViewModel, LaughUser>().ReverseMap();
             });
 
             if (env.IsDevelopment())

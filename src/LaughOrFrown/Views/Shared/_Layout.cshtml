@@ -24,15 +24,21 @@
     <div id="outerContainer" class="container">
         <div id="innerContainer">
             <div class="line1"></div>
+
             <a asp-controller="App" asp-action="Index">
                 <div id="homeBox" class="sideBox">
                     <p>Front Page</p>
                 </div>
             </a>
+
             <div class="line2"></div>
-            <div id="secondBox" class="sideBox">
-                <p>Profile</p>
-            </div>
+
+            <a asp-controller="Profile" asp-action="Index">
+                <div id="secondBox" class="sideBox">
+                    <p>Profile</p>
+                </div>
+            </a>
+
             <div class="titleBar">
                 <h2 class="titleText">@ViewBag.Title</h2>
             </div>

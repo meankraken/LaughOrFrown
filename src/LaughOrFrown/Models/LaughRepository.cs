@@ -52,5 +52,11 @@ namespace LaughOrFrown.Models
             theRating.HotRating = hotRating;
             theRating.OffensiveRating = offensiveRating;
         }
+
+        public void UpdateUser(LaughUser user)
+        {
+            var theUser = _context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
+            theUser = user; 
+        }
     }
 }

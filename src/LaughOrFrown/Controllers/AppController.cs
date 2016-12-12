@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LaughOrFrown.Controllers
 {
-    public class AppController : Controller //single controller for entire App
+    public class AppController : Controller //App and joke controller
     {
         private ILaughRepository _repo;
         private SignInManager<LaughUser> _signInManager;
@@ -214,7 +214,7 @@ namespace LaughOrFrown.Controllers
             jokeViewModel.HotAverageRating = getAverageHotRating(jokeViewModel.Ratings);
             jokeViewModel.OffensiveAverageRating = getAverageOffensiveRating(jokeViewModel.Ratings);
 
-            var usersRating = new Rating();
+            var usersRating = new Rating(); //hold user's rating for the joke if it exists
 
             foreach (var rating in jokeViewModel.Ratings)
             {
@@ -251,6 +251,12 @@ namespace LaughOrFrown.Controllers
                 ModelState.ClearValidationState("HotRating");
                 ModelState.ClearValidationState("OffensiveRating");
                 ModelState.AddModelError("", "Must select a hot and offensiveness rating.");
+            }
+            else if (theJoke.Uploader == theUser.UserName) //if rating own joke
+            {
+                ModelState.ClearValidationState("HotRating");
+                ModelState.ClearValidationState("OffensiveRating");
+                ModelState.AddModelError("", "You can't rate your own joke. Nice try...");
             }
             else
             {

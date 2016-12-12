@@ -1,0 +1,93 @@
+﻿@model LaughOrFrown.ViewModels.ProfileViewModel
+
+@{ 
+    Layout = "_ProfileLayout";
+}
+
+<div class="container">
+    @Html.AntiForgeryToken()  
+
+    <h3>UPDATE INFO</h3>
+
+    <hr/>
+
+    <div class="infoBox">
+        <form method="post" asp-action="Edit">
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Username</label>
+                    <h3>@Model.UserName</h3>
+                    <input name="UserName" hidden value="@Model.UserName"/>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>First name </label> <span asp-validation-for="FirstName"></span>
+                    <input name="FirstName" class="form-control" value="@Model.FirstName" />
+                </div>
+                <div class="col-md-6">
+                    <label>Last name</label> <span asp-validation-for="LastName"></span>
+                    <input name="LastName" class="form-control" value="@Model.LastName" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Email</label> 
+                    <input name="Email" type="email" class="form-control" value="@Model.Email" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>State</label>
+                    <input name="State" class="form-control" value="@Model.State" />
+                </div>
+                <div class="col-md-6">
+                    <label>City</label>
+                    <input name="City" class="form-control" value="@Model.City" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <label>Zip code</label> <span asp-validation-for="ZipCode"></span>
+                    <input name="ZipCode" class="form-control" value="@Model.ZipCode" />
+                </div>
+                <div class="col-md-6">
+                    <button type="button" class="btn btn-default pull-right" id="cancelBtn">Cancel</button>
+                    <button type="submit" class="btn btn-primary pull-right">Save Changes</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+
+    <div class="footerLinks">
+        <form id="logoutForm" method="post" asp-controller="App" asp-action="Logout">
+            <a href="#">Logout</a>
+        </form>
+    </div>
+
+</div> 
+
+@section scripts {
+    <script src="~/scripts/profileScript.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

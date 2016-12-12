@@ -1,0 +1,85 @@
+﻿@model LaughOrFrown.ViewModels.ProfileViewModel
+
+@{ 
+    Layout = "_ProfileLayout";
+}
+
+<div class="container">
+    <h3>ACCOUNT INFO</h3>
+
+    <hr/>
+
+    <div class="infoBox">
+        <div class="row">
+            <div class="col-md-6">
+                <label>Username</label>
+                <h3>@Model.UserName</h3>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>First name</label>
+                <h3>@Model.FirstName</h3>
+            </div>
+            <div class="col-md-6">
+                <label>Last name</label>
+                <h3>@Model.LastName</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Email</label>
+                <h3>@Model.Email</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>State</label>
+                <h3>@Model.State</h3>
+            </div>
+            <div class="col-md-6">
+                <label>City</label>
+                <h3>@Model.City</h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <label>Zip code</label>
+                <h3>@Model.ZipCode</h3>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="footerLinks">
+        <a asp-controller="Profile" asp-action="Edit">Edit Profile</a><br/>
+        <form id="logoutForm" method="post" asp-controller="App" asp-action="Logout">
+            <a href="#">Logout</a>
+        </form>
+    </div>
+
+</div> 
+
+@section scripts {
+    <script src="~/scripts/profileScript.js"></script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
