@@ -97,7 +97,7 @@
             <form id="jokeForm" method="post" asp-action="Index">
                 <div class="form-group">
                     <label for="jokeText">Joke Title</label>
-                    <input class="form-control" placeholder="Enter the joke intro or title here" id="jokeText" name="JokeText"/>
+                    <input class="form-control" placeholder="Enter the joke intro or title here" id="jokeText" name="JokeText" />
                     <span id="jokeTextError">  *Joke title must be between 5 and 50 characters</span>
                 </div>
 
@@ -142,7 +142,15 @@
             <div id="dateBox">
                 <p id="dateText">Published in Houston, Texas - </p>
             </div>
-            
+
+            @if (!string.IsNullOrEmpty(ViewBag.Auth))
+            {
+                if (ViewBag.Auth == "needed")
+                {
+                    <div class="needAuthText">{ You need to be logged in to do that silly goose! }</div>
+                }
+            }
+
             <div id="bodyRow" class="row">
                 <div class="col-md-4 bodyCol">
                     <h3>"Never take life seriously. Nobody gets out alive anyway."</h3>
@@ -208,7 +216,7 @@
 
                     @if (ViewBag.State == "Register")
                     {
-                        @Html.ValidationSummary() 
+                        @Html.ValidationSummary()
                     }
                 </div>
 

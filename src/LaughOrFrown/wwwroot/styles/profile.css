@@ -30,6 +30,15 @@
     color:#a5c7ff;
 }
 
+#profileBar a {
+    text-decoration:none;
+}
+
+#profileBar h2:hover {
+    color:white;
+}
+
+
 .laughText {
     position:absolute;
     text-align:center;

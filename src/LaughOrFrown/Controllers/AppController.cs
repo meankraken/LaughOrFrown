@@ -27,8 +27,12 @@ namespace LaughOrFrown.Controllers
             _logger = logger;
         }
 
-        public IActionResult Index() //main page + login / register form 
+        public IActionResult Index(string ReturnUrl) //main page + login / register form 
         {
+            if (!string.IsNullOrEmpty(ReturnUrl) && ReturnUrl.Length > 0)
+            {
+                ViewBag.Auth = "needed";
+            }
             var userId = _userManager.GetUserId(HttpContext.User);
             var thisUser = _repo.GetUser(userId);
             var userStats = new UserStatsViewModel();

@@ -1,7 +1,7 @@
 ﻿.container {
   position:relative;
   width:90%;
-  height:1100px;
+  height:1150px;
   box-shadow:0 0 5px 3px grey;
   padding:0;
   background-color:#FAF9F5;
@@ -388,6 +388,10 @@ hr {
     color:white;
 }
 
-
+.needAuthText {
+    text-align:center;
+    font-family:Ovo;
+    font-size:2em;
+}
 
 

@@ -16,7 +16,7 @@
                 <h3>@Joke.JokeText</h3>
                 @if (ViewBag.Title == "Offensive Jokes")
                 {
-                    <h5>Offensive rating: <span class="ratingText">@(Joke.OffensiveAverageRating >= 0 ? Joke.OffensiveAverageRating.ToString() : "Not rated")</span></h5>
+                    <h5 class="center-block">Offensive rating: <span class="ratingText">@(Joke.OffensiveAverageRating >= 0 ? Joke.OffensiveAverageRating.ToString() : "Not rated")</span></h5>
                 }
                 else if (ViewBag.Title == "Top Jokes")
                 {

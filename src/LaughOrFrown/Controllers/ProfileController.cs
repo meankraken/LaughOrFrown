@@ -8,11 +8,13 @@ using Microsoft.AspNetCore.Identity;
 using AutoMapper;
 using LaughOrFrown.ViewModels;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LaughOrFrown.Controllers
 {
+    [Authorize]
     public class ProfileController : Controller
     {
         private ILaughRepository  _repo;
