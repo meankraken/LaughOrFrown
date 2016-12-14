@@ -71,6 +71,7 @@
 .active {
     cursor:default;
     pointer-events:none;
+    border-bottom:1px solid #6b93d3; 
 }
 
 .container h3 {

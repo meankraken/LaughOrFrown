@@ -33,6 +33,8 @@ namespace LaughOrFrown.Controllers
             ViewBag.Title = "Profile";
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            ViewBag.User = user.UserName;
+
             var profileVM = Mapper.Map<ProfileViewModel>(user);
 
             return View(profileVM);
@@ -43,6 +45,8 @@ namespace LaughOrFrown.Controllers
             ViewBag.Title = "Profile";
 
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            ViewBag.User = user.UserName;
+
             var profileVM = Mapper.Map<ProfileViewModel>(user);
 
             return View(profileVM);
@@ -54,6 +58,8 @@ namespace LaughOrFrown.Controllers
         {
             ViewBag.Title = "Profile";
             var user = await _userManager.GetUserAsync(HttpContext.User);
+            ViewBag.User = user.UserName;
+
             var profileVM = Mapper.Map<ProfileViewModel>(user);
 
             if (!ModelState.IsValid)
@@ -85,5 +91,85 @@ namespace LaughOrFrown.Controllers
             }
             return View(profileVM);
         }
+
+        public async Task<IActionResult> Jokes(string sortby) //user's uploaded jokes 
+        {
+            ViewBag.Title = "Jokes";
+            if (!string.IsNullOrEmpty(sortby))
+            {
+                ViewBag.SortBy = sortby; //parameter for which field to sort list by 
+            }
+            else ViewBag.SortBy = "Date"; //default set to sort by date 
+
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            ViewBag.User = user.UserName;
+            var jokes = _repo.GetUserJokes(user.UserName);
+
+            var userJokes = Mapper.Map<IEnumerable<JokeViewModel>>(jokes);
+
+            foreach (var joke in userJokes) 
+            {
+                joke.HotAverageRating = getAverageHotRating(joke.Ratings);
+                joke.OffensiveAverageRating = getAverageOffensiveRating(joke.Ratings);
+            }
+
+            switch (sortby)
+            {
+                case "Title":
+                    userJokes = userJokes.OrderByDescending(o => o.JokeText);
+                    break;
+                case "Date":
+                    userJokes = userJokes.OrderByDescending(o => o.DateCreated);
+                    break;
+                case "Ratings":
+                    userJokes = userJokes.OrderByDescending(o => o.Ratings.Count());
+                    break;
+                case "HotRating":
+                    userJokes = userJokes.OrderByDescending(o => o.HotAverageRating);
+                    break;
+                case "OffensiveRating":
+                    userJokes = userJokes.OrderByDescending(o => o.OffensiveAverageRating);
+                    break;
+                default:
+                    break;
+
+            }
+
+            return View(userJokes); 
+        }
+
+
+
+        //helper functions
+        private double getAverageHotRating(ICollection<Rating> ratings) //helper function to get the average hot rating out of a collection of ratings
+        {
+            if (ratings.Count == 0)
+            {
+                return -1;
+            }
+
+            double average = 0;
+            foreach (var rating in ratings)
+            {
+                average += rating.HotRating;
+            }
+            return average / ratings.Count;
+        }
+
+        private double getAverageOffensiveRating(ICollection<Rating> ratings) //helper function to get the average offensive rating out of a collection of ratings
+        {
+            if (ratings.Count == 0)
+            {
+                return -1;
+            }
+
+            double average = 0;
+            foreach (var rating in ratings)
+            {
+                average += rating.OffensiveRating;
+            }
+            return average / ratings.Count;
+        }
+
     }
 }

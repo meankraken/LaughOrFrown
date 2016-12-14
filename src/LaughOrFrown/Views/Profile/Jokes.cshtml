@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LaughOrFrown.ViewModels.JokeViewModel>
+
+@{ 
+    Layout = "_ProfileLayout";
+}
+
+<div class="container">
+    <h3>Your Contributions</h3>
+
+    <hr/>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th><a asp-action="Jokes" asp-route-sortby="Title" class="@linkClass("Title")">Joke Title</a></th>
+                <th><a asp-action="Jokes" asp-route-sortby="Date" class="@linkClass("Date")">Date Created</a></th>
+                <th><a asp-action="Jokes" asp-route-sortby="Ratings" class="@linkClass("Ratings")">Ratings Received</a></th>
+                <th><a asp-action="Jokes" asp-route-sortby="HotRating" class="@linkClass("HotRating")">Hot Rating</a></th>
+                <th><a asp-action="Jokes" asp-route-sortby="OffensiveRating" class="@linkClass("OffensiveRating")">Offensive Rating</a></th>
+            </tr> 
+        </thead>
+
+        <tbody>
+            @foreach (var joke in Model)
+            {
+                <tr>
+                    <td class="jokeTitle">@joke.JokeText</td>
+                    <td>@joke.DateCreated</td>
+                    <td>@joke.Ratings.Count()</td>
+                    <td>@joke.HotAverageRating</td>
+                    <td>@joke.OffensiveAverageRating</td>
+                </tr>
+
+            }
+        </tbody>
+
+    </table>
+
+</div>
+
+@section styles {
+    <link href="~/styles/userJokeTable.css" rel="stylesheet" />
+}
+
+
+@functions {
+    public string linkClass(string sortby)
+    {
+        if (ViewBag.SortBy == sortby)
+        {
+            return "active";
+        }
+        else return "";
+    }
+}
+
+
+

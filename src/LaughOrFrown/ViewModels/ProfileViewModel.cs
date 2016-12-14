@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LaughOrFrown.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel //view model for setting user information
     {
         public string UserName { get; set; }
 

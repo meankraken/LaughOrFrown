@@ -11,6 +11,8 @@ namespace LaughOrFrown.Models
 
         IEnumerable<Joke> GetJokes();
 
+        IEnumerable<Joke> GetUserJokes(string username); 
+
         LaughUser GetUser(string id);
 
         void AddJoke(Joke joke);

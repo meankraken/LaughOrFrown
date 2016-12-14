@@ -41,6 +41,11 @@ namespace LaughOrFrown.Models
             return _context.Users.Include(j => j.Ratings).Include(i => i.Jokes).ThenInclude(l => l.Ratings).Where(k => k.Id == id).FirstOrDefault(); //eager loading multiple levels
         }
 
+        public IEnumerable<Joke> GetUserJokes(string username) //get jokes for specific user
+        {
+            return _context.Jokes.Where(j => j.Uploader == username).Include(i => i.Ratings).ToList();
+        }
+
         public async Task<bool> Save() //save changes
         {
             return (await _context.SaveChangesAsync() > 0);
