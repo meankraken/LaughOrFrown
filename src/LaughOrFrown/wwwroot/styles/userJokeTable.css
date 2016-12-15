@@ -7,3 +7,58 @@
 th {
     text-align:center;
 }
+
+.bodyRow {
+    cursor:pointer;
+
+}
+
+#popUpMenu {
+    display:none;
+    position:absolute;
+    top:0;
+    left:0;
+}
+
+.arrow {
+    position:relative;
+    height:0;
+    width:0;
+    border-bottom:8px solid #bababa; 
+    border-left:8px solid transparent;
+    border-right:8px solid transparent;
+    border-top:8px solid transparent;
+    left:45px;
+}
+
+.menuItem {
+    height:30px;
+    width:100px;
+    color:white;
+    font-size:.8em;
+    line-height:30px;
+    background-color:#bababa;
+    text-align:center;
+    font-family:Lato;
+    cursor:pointer;
+}
+
+.menuItem:hover {
+    background-color:grey;
+}
+
+#viewJoke { 
+    border-bottom:1px solid grey; 
+    border-radius:5px 5px 0 0;
+}
+
+#deleteJoke { 
+    border-radius:0 0 5px 5px;
+}
+
+
+
+
+
+
+

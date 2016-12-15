@@ -31,6 +31,15 @@ namespace LaughOrFrown.Models
             return _context.Jokes.Where(j => j.Id == id).Include(i => i.Ratings).FirstOrDefault();
         }
 
+        public void DeleteJoke(int id) //delete joke with id 
+        {
+            var theJoke = _context.Jokes.Where(j => j.Id == id).FirstOrDefault();
+            var ratings = _context.Ratings.Where(r => r.Joke == theJoke);
+            _context.Ratings.RemoveRange(ratings);
+            _context.Jokes.Remove(theJoke);
+            
+        }
+
         public IEnumerable<Joke> GetJokes() //get all jokes
         {
             return _context.Jokes.Include(j => j.Ratings).ToList();
@@ -63,5 +72,7 @@ namespace LaughOrFrown.Models
             var theUser = _context.Users.Where(u => u.Id == user.Id).FirstOrDefault();
             theUser = user; 
         }
+
+        
     }
 }

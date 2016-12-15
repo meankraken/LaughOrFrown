@@ -24,5 +24,7 @@ namespace LaughOrFrown.Models
         Task<bool> Save();
 
         void UpdateUser(LaughUser user);
+
+        void DeleteJoke(int jokeId);
     }
 }

@@ -56,18 +56,14 @@
         </div>
     </div>
 
-    <div class="footerLinks">
+    @section footer {
         <a asp-controller="Profile" asp-action="Edit">Edit Profile</a><br/>
-        <form id="logoutForm" method="post" asp-controller="App" asp-action="Logout">
-            <a href="#">Logout</a>
-        </form>
-    </div>
+    }
+        
 
 </div> 
 
-@section scripts {
-    <script src="~/scripts/profileScript.js"></script>
-}
+
 
 
 

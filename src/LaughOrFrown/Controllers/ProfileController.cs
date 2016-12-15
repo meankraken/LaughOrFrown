@@ -138,7 +138,28 @@ namespace LaughOrFrown.Controllers
             return View(userJokes); 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(int jokeid)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
 
+            if (string.IsNullOrEmpty(user.UserName))
+            {
+                return RedirectToAction("Index", "App");
+            }
+
+            _repo.DeleteJoke(jokeid);
+
+            if (await _repo.Save())
+            {
+                return RedirectToAction("Jokes");
+            }
+
+            return RedirectToAction("Index", "App");
+        }
+
+        
 
         //helper functions
         private double getAverageHotRating(ICollection<Rating> ratings) //helper function to get the average hot rating out of a collection of ratings

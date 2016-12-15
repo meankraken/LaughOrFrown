@@ -37,7 +37,15 @@
         @RenderBody()
     </div>
 
+    <div class="footerLinks">
+        @RenderSection("footer", false)
+        <form id="logoutForm" method="post" asp-controller="App" asp-action="Logout">
+            <a href="#">Logout</a>
+        </form>
+    </div>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/scripts/profileScript.js"></script>
     @RenderSection("scripts", false);
 
 </body>

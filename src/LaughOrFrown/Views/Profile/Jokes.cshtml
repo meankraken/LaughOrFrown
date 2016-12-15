@@ -4,12 +4,18 @@
     Layout = "_ProfileLayout";
 }
 
+@section styles {
+    <link href="~/styles/userJokeTable.css" rel="stylesheet" />
+}
+
+@Html.AntiForgeryToken() 
+
 <div class="container">
     <h3>Your Contributions</h3>
 
     <hr/>
 
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th><a asp-action="Jokes" asp-route-sortby="Title" class="@linkClass("Title")">Joke Title</a></th>
@@ -23,12 +29,33 @@
         <tbody>
             @foreach (var joke in Model)
             {
-                <tr>
+                <tr class="bodyRow" id="@joke.Id">
                     <td class="jokeTitle">@joke.JokeText</td>
                     <td>@joke.DateCreated</td>
                     <td>@joke.Ratings.Count()</td>
-                    <td>@joke.HotAverageRating</td>
-                    <td>@joke.OffensiveAverageRating</td>
+                    <td>
+                        @if (joke.HotAverageRating == -1)
+                        {
+                            <text>n/a</text>
+
+                        }
+                        else
+                        {
+                            <text>@joke.HotAverageRating</text>
+                        }
+
+                </td>
+                    <td>
+                        @if (joke.OffensiveAverageRating == -1)
+                        {
+                            <text>n/a</text>
+
+                        }
+                        else
+                        {
+                            <text>@joke.OffensiveAverageRating</text>
+                        }
+                    </td>
                 </tr>
 
             }
@@ -36,10 +63,23 @@
 
     </table>
 
+    <div id="popUpMenu">
+        <form id="deleteForm" method="post" asp-controller="Profile" asp-action="Delete">
+            <input type="hidden" name="jokeid" id="jokeid" />
+            <div class="arrow"></div>
+            <div class="menuItem" id="viewJoke">
+                View Joke
+            </div>
+            <div class="menuItem" id="deleteJoke">
+                Delete Joke
+            </div>
+        </form>
+    </div>
+
 </div>
 
-@section styles {
-    <link href="~/styles/userJokeTable.css" rel="stylesheet" />
+@section scripts {
+    <script src="~/scripts/userJokesScript.js"></script>
 }
 
 
