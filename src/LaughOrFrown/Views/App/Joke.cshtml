@@ -56,7 +56,7 @@
                     }
                     else
                     {
-                        <h1>@Model.HotAverageRating</h1>
+                        <h1>@Math.Round(Model.HotAverageRating, 2, MidpointRounding.AwayFromZero)</h1>
 
                     }
 
@@ -68,7 +68,7 @@
                 }
                 else
                 {
-                    <h1 style="color:#cc340e">@Model.OffensiveAverageRating</h1>
+                    <h1 style="color:#cc340e">@Math.Round(Model.OffensiveAverageRating, 2, MidpointRounding.AwayFromZero)</h1>
                 }
             </div>
         </div>

@@ -4,8 +4,10 @@
 
     $('.bodyRow').on('click', function (e) { //bring up action menu 
         e.stopPropagation();
+        menu.css('display', 'none'); 
         currentJoke = $(this).attr('id');
-        menu.css('display', 'block');
+        //menu.css('display', 'block'); 
+        menu.fadeIn();
         menu.css('left', e.pageX - 50);
         menu.css('top', e.pageY);
     });

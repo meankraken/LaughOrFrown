@@ -59,9 +59,15 @@
                 </tr>
 
             }
+            
         </tbody>
-
     </table>
+
+    @if (Model.Count() == 0)
+            {
+        <h5>You have not made any contributions yet! Get to work.</h5>
+
+    }
 
     <div id="popUpMenu">
         <form id="deleteForm" method="post" asp-controller="Profile" asp-action="Delete">

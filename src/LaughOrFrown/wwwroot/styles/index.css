@@ -302,7 +302,7 @@ hr {
     display: inline-block;
     margin-left: 5%;
     float: right;
-    
+    pointer-events:none;  
 }
 
 .controlBtns {

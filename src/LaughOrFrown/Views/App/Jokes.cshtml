@@ -16,11 +16,11 @@
                 <h3>@Joke.JokeText</h3>
                 @if (ViewBag.Title == "Offensive Jokes")
                 {
-                    <h5 class="center-block">Offensive rating: <span class="ratingText">@(Joke.OffensiveAverageRating >= 0 ? Joke.OffensiveAverageRating.ToString() : "Not rated")</span></h5>
+                    <h5 class="center-block">Offensive rating: <span class="ratingText">@(Joke.OffensiveAverageRating >= 0 ? Math.Round(Joke.OffensiveAverageRating, 2, MidpointRounding.AwayFromZero).ToString() : "Not rated")</span></h5>
                 }
                 else if (ViewBag.Title == "Top Jokes")
                 {
-                    <h5>Hot rating: <span class="ratingText">@(Joke.HotAverageRating >= 0 ? Joke.HotAverageRating.ToString() : "Not rated")</span></h5>
+                    <h5>Hot rating: <span class="ratingText">@(Joke.HotAverageRating >= 0 ? Math.Round(Joke.HotAverageRating, 2, MidpointRounding.AwayFromZero).ToString() : "Not rated")</span></h5>
                 }
                 else
                 {

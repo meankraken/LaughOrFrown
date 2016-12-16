@@ -54,6 +54,10 @@
     
 }
 
+.laughText a {
+    color:inherit;
+}
+
 .backText {
     float:right;
     text-align:right; 
