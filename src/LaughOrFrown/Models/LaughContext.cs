@@ -25,7 +25,8 @@ namespace LaughOrFrown.Models
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer(_config["ConnectionStrings:LaughContextConnection"]);
+            //optionsBuilder.UseSqlServer(_config["ConnectionStrings:LaughContextConnection"]);
+            optionsBuilder.UseSqlServer(_config["ConnectionStrings:DeployConnection"]);
         }
     }
 }

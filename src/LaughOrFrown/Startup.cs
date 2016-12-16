@@ -19,8 +19,10 @@ namespace LaughOrFrown
 {
     public class Startup
     {
+        
         private IHostingEnvironment _env;
         private IConfigurationRoot _config;
+        
 
         public Startup(IHostingEnvironment env)
         {
@@ -28,12 +30,14 @@ namespace LaughOrFrown
 
             var builder = new ConfigurationBuilder().SetBasePath(_env.ContentRootPath).AddJsonFile("config.json").AddEnvironmentVariables();
             _config = builder.Build();
+            
         }
         
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddSingleton(_config);
-
+            
             services.AddIdentity<LaughUser, IdentityRole>(config =>
             {
                 config.User.RequireUniqueEmail = false; //no emails needed for this application
@@ -45,20 +49,26 @@ namespace LaughOrFrown
             .AddEntityFrameworkStores<LaughContext>();
 
             services.AddDbContext<LaughContext>();
+
+            
             services.AddTransient<LaughContextSeed>();
             services.AddScoped<ILaughRepository, LaughRepository>();
-
+            
             services.AddLogging();
+            
             services.AddMvc(options =>
             {
                 //options.Filters.Add(new RequireHttpsAttribute()); 
             });
+            
+            
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, LaughContextSeed seed)
         {
+             
             loggerFactory.AddConsole();
-
+            
             app.UseStaticFiles();
 
             app.UseIdentity();
@@ -75,16 +85,27 @@ namespace LaughOrFrown
             {
                 app.UseDeveloperExceptionPage();
                 loggerFactory.AddDebug(LogLevel.Information);
+            }
+            else
+            {
                 app.UseStatusCodePages();
             }
+
+            /*
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync("Hello World!");
+            });
+            */
 
             app.UseMvc(config =>
             {
                 config.MapRoute("Default", "{controller}/{action}/{id?}", new { controller = "App", action = "Index" });
                 config.MapRoute("Jokes", "{action}/{id?}", new { controller = "App" });
             });
-
+            
             seed.EnsureSeeded().Wait();
+            
         }
     }
 }

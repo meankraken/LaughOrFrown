@@ -14,19 +14,22 @@ namespace LaughOrFrown.Controllers
 {
     public class AppController : Controller //App and joke controller
     {
+        
         private ILaughRepository _repo;
         private SignInManager<LaughUser> _signInManager;
         private UserManager<LaughUser> _userManager;
         private ILogger<AppController> _logger;
+        
 
         public AppController(ILaughRepository repo, SignInManager<LaughUser> signInManager, UserManager<LaughUser> userManager, ILogger<AppController> logger)
-        {
+        {           
             _repo = repo;
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            
         }
-
+ 
         public IActionResult Index(string ReturnUrl) //main page + login / register form 
         {
             if (!string.IsNullOrEmpty(ReturnUrl) && ReturnUrl.Length > 0)
@@ -49,6 +52,7 @@ namespace LaughOrFrown.Controllers
 
             return View(userStats); 
         }
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -364,6 +368,6 @@ namespace LaughOrFrown.Controllers
             }
             return average / ratings.Count;
         }
-
+        
     }
 }
