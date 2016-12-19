@@ -51,16 +51,16 @@
                         <div class="col-md-6 controlsCol statsCol">
                             <span style="font-family:Marvel;border-right:1px solid grey;padding-right:5px;margin-right:15px;margin-top:15px;float:left;font-weight:500">USER STATS</span>
                             <div class="statBadges">
-                                <button class="btn btn-success">
+                                <a asp-controller="Profile" asp-action="Jokes" class="btn btn-success">
                                     Jokes Contributed <span class="badge">@Model.Jokes.Count()</span>
-                                </button>
+                                </a>
 
-                                <button class="btn btn-success">
+                                <a asp-controller="Profile" asp-action="Jokes" class="btn btn-success">
                                     Ratings Received  <span class="badge">@ratingsReceived()</span>
-                                </button>
-                                <button class="btn btn-success">
+                                </a>
+                                <a asp-controller="Profile" asp-action="Index" class="btn btn-success">
                                     Ratings Sent  <span class="badge">@Model.Ratings.Count()</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-6 controlsCol">
@@ -181,6 +181,7 @@
                     <h3>"Wait... why does this newspaper have a login form?"</h3>
                     <p class="authorText">- Nosy Person</p>
                     <p>Why not? LaughOrFrown is constantly looking for ways to provide the unexpected, and in this case the unexpected takes the form of a form.</p>
+                    <p style="font-family:Arial;font-size:.85em">Sample login - Username: <span style="font-weight:700">admin</span> / Password: <span style="font-weight:700">passw0rd</span></p>
 
                     <form asp-controller="App" asp-action="Login" id="loginForm" method="post">
                         <div class="inputBox">

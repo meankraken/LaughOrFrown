@@ -41,7 +41,7 @@
                         }
                         else
                         {
-                            <text>@joke.HotAverageRating</text>
+                            <text>@Math.Round(joke.HotAverageRating, 2, MidpointRounding.AwayFromZero)</text>
                         }
 
                 </td>
@@ -53,7 +53,7 @@
                         }
                         else
                         {
-                            <text>@joke.OffensiveAverageRating</text>
+                            <text>@Math.Round(joke.OffensiveAverageRating, 2, MidpointRounding.AwayFromZero)</text>
                         }
                     </td>
                 </tr>

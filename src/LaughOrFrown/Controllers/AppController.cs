@@ -243,7 +243,7 @@ namespace LaughOrFrown.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Joke(RatingViewModel rating) //submit rating for joke
+        public async Task<IActionResult> Joke(RatingViewModel rating, string returl) //submit rating for joke
         {
             ViewBag.Title = "Just A Joke";
             ViewBag.ReturnUrl = Url.Action("TopJokes");
@@ -287,12 +287,12 @@ namespace LaughOrFrown.Controllers
                     var jokeRating = Mapper.Map<Rating>(rating);
                     jokeRating.User = theUser;
                     jokeRating.Joke = theJoke;
-                    _repo.AddRating(jokeRating);
+                    _repo.AddRating(jokeRating); 
                 }
 
                 if (await _repo.Save())
                 {
-                    return RedirectToAction("Joke");
+                    return RedirectToAction("Joke", new { id = theJoke.Id, returnurl = returl});
                 }
             }
 

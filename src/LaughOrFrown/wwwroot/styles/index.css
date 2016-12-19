@@ -255,7 +255,7 @@ hr {
 }
 
 #userPanel {
-    width:75%;
+    width:90%;
     margin:auto;
 }
 
@@ -281,15 +281,16 @@ hr {
     padding-top:0;  
 }
 
-.statsCol button {
+.statsCol a {
     display:inline-block;
     width:auto;
     position:relative;
     height:30px;
-    top:-7px;
     font-family:Lato;
     letter-spacing:1px;
-    font-size:.85em;
+    font-size:.85em; 
+    margin-bottom:15px;
+    top:8px; 
 }
 
 .controlsCol a {
@@ -302,7 +303,7 @@ hr {
     display: inline-block;
     margin-left: 5%;
     float: right;
-    pointer-events:none;  
+     
 }
 
 .controlBtns {

@@ -72,7 +72,7 @@
                 }
             </div>
         </div>
-        <form method="post" asp-controller="App" asp-action="Joke">
+        <form method="post" asp-controller="App" asp-action="Joke" asp-route-returl="@ViewBag.ReturnUrl">
             <div class="row">
                 <div class="col-md-6">
                     <select name="HotRating" class="form-control ratingSelect" id="hotSelect">
@@ -101,6 +101,7 @@
             <div class="row">
                 <div class="col-md-12" style="height:50px;">
                     <input name="JokeId" value="@Model.Id" hidden/>
+                    
 
                     @if (Model.UsersRating != null)
                     {

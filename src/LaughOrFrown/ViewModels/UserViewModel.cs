@@ -13,7 +13,7 @@ namespace LaughOrFrown.ViewModels
         public string Username { get; set; }
 
         [Required]
-        [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be a minimum of 8 characters long.")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "Password must be at least 8 chars and contain both letters and numbers.")]
         public string Password { get; set; }
     }
 }
